@@ -1,0 +1,330 @@
+/* =====================================================================
+   JCCF FUTA — Tailwind CSS v4 theme (Material Design 3 tokens)
+   Drop into app/globals.css (Next.js) in place of the default import.
+   Seed: #FA0404 — sampled from the official logo (red ring). To regenerate:
+     node generate-theme.mjs "#<logo red>"  → paste the printed values below.
+   ===================================================================== */
+@import "tailwindcss";
+
+/* Dark mode follows the .dark class on <html> (set from system preference + toggle) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- 1. Reference + system colour tokens (M3 roles) ---------- */
+:root {
+  /* light scheme */
+  --md-sys-color-primary: #bc0001;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #ffdad4;
+  --md-sys-color-on-primary-container: #410000;
+  --md-sys-color-secondary: #b62418;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #fd5743;
+  --md-sys-color-on-secondary-container: #5c0000;
+  --md-sys-color-tertiary: #c3ab00;            /* yellow glow — traces only */
+  --md-sys-color-on-tertiary: #211b00;
+  --md-sys-color-tertiary-container: #ffe339;
+  --md-sys-color-on-tertiary-container: #211b00;
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #93000a;
+  --md-sys-color-surface: #fffbff;
+  --md-sys-color-on-surface: #1f1a1a;
+  --md-sys-color-surface-variant: #f1dfdc;
+  --md-sys-color-on-surface-variant: #504442;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #fff4f2;
+  --md-sys-color-surface-container: #f9eeed;
+  --md-sys-color-surface-container-high: #f3e9e7;
+  --md-sys-color-surface-container-highest: #ebe0de;
+  --md-sys-color-surface-dim: #e2d8d6;
+  --md-sys-color-inverse-surface: #352f2e;
+  --md-sys-color-inverse-on-surface: #f9eeed;
+  --md-sys-color-inverse-primary: #ffb4a8;
+  --md-sys-color-outline: #827472;
+  --md-sys-color-outline-variant: #d4c3c0;
+  --md-sys-color-scrim: #000000;
+
+  /* "Stage": the always-dark brand sections (hero, live, programmes, give band).
+     Same in light and dark mode. */
+  --jccf-stage: #0a0a0a;
+  --jccf-stage-container: #161616;
+  --jccf-stage-container-high: #222222;
+  --jccf-on-stage: #ffffff;
+  --jccf-on-stage-variant: #b8b8b8;            /* 9.98:1 on stage */
+  --jccf-stage-outline: rgb(255 255 255 / 0.24);
+  --jccf-stage-accent: #fa0404;                /* exact logo red: display text on stage (4.77:1) */
+  --jccf-stage-accent-text: #ff5541;           /* red SMALL text on stage (6.25:1) */
+  --jccf-glow: #fadd26;                        /* logo yellow glow on stage (14.5:1) */
+  --jccf-live: #fa0404;                        /* live dot + badge */
+
+  /* State-layer opacities (M3) */
+  --md-state-hover: 0.08;
+  --md-state-focus: 0.10;
+  --md-state-pressed: 0.10;
+  --md-state-dragged: 0.16;
+  --md-state-disabled-content: 0.38;
+  --md-state-disabled-container: 0.12;
+}
+
+.dark {
+  --md-sys-color-primary: #ffb4a8;
+  --md-sys-color-on-primary: #690000;
+  --md-sys-color-primary-container: #ff5541;
+  --md-sys-color-on-primary-container: #2f0000;
+  --md-sys-color-secondary: #ffb4a8;
+  --md-sys-color-on-secondary: #690000;
+  --md-sys-color-secondary-container: #930201;
+  --md-sys-color-on-secondary-container: #ff9a8a;
+  --md-sys-color-tertiary: #e2c600;
+  --md-sys-color-on-tertiary: #383000;
+  --md-sys-color-tertiary-container: #524700;
+  --md-sys-color-on-tertiary-container: #ffe339;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
+  --md-sys-color-surface: #171212;
+  --md-sys-color-on-surface: #ebe0de;
+  --md-sys-color-surface-variant: #504442;
+  --md-sys-color-on-surface-variant: #d4c3c0;
+  --md-sys-color-surface-container-lowest: #110d0c;
+  --md-sys-color-surface-container-low: #1f1a1a;
+  --md-sys-color-surface-container: #231e1e;
+  --md-sys-color-surface-container-high: #2e2928;
+  --md-sys-color-surface-container-highest: #393332;
+  --md-sys-color-surface-dim: #171212;
+  --md-sys-color-inverse-surface: #ebe0de;
+  --md-sys-color-inverse-on-surface: #352f2e;
+  --md-sys-color-inverse-primary: #c00001;
+  --md-sys-color-outline: #9d8d8b;
+  --md-sys-color-outline-variant: #504442;
+}
+
+/* ---------- 2. Tailwind theme: utilities generated from the tokens ---------- */
+@theme inline {
+  /* Colours → bg-primary, text-on-primary, border-outline-variant, bg-stage, text-on-stage … */
+  --color-primary: var(--md-sys-color-primary);
+  --color-on-primary: var(--md-sys-color-on-primary);
+  --color-primary-container: var(--md-sys-color-primary-container);
+  --color-on-primary-container: var(--md-sys-color-on-primary-container);
+  --color-secondary: var(--md-sys-color-secondary);
+  --color-on-secondary: var(--md-sys-color-on-secondary);
+  --color-secondary-container: var(--md-sys-color-secondary-container);
+  --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
+  --color-tertiary: var(--md-sys-color-tertiary);
+  --color-on-tertiary: var(--md-sys-color-on-tertiary);
+  --color-tertiary-container: var(--md-sys-color-tertiary-container);
+  --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+  --color-error: var(--md-sys-color-error);
+  --color-on-error: var(--md-sys-color-on-error);
+  --color-error-container: var(--md-sys-color-error-container);
+  --color-on-error-container: var(--md-sys-color-on-error-container);
+  --color-surface: var(--md-sys-color-surface);
+  --color-on-surface: var(--md-sys-color-on-surface);
+  --color-surface-variant: var(--md-sys-color-surface-variant);
+  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
+  --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);
+  --color-surface-container-low: var(--md-sys-color-surface-container-low);
+  --color-surface-container: var(--md-sys-color-surface-container);
+  --color-surface-container-high: var(--md-sys-color-surface-container-high);
+  --color-surface-container-highest: var(--md-sys-color-surface-container-highest);
+  --color-surface-dim: var(--md-sys-color-surface-dim);
+  --color-inverse-surface: var(--md-sys-color-inverse-surface);
+  --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
+  --color-inverse-primary: var(--md-sys-color-inverse-primary);
+  --color-outline: var(--md-sys-color-outline);
+  --color-outline-variant: var(--md-sys-color-outline-variant);
+  --color-scrim: var(--md-sys-color-scrim);
+
+  --color-stage: var(--jccf-stage);
+  --color-stage-container: var(--jccf-stage-container);
+  --color-stage-container-high: var(--jccf-stage-container-high);
+  --color-on-stage: var(--jccf-on-stage);
+  --color-on-stage-variant: var(--jccf-on-stage-variant);
+  --color-stage-outline: var(--jccf-stage-outline);
+  --color-stage-accent: var(--jccf-stage-accent);
+  --color-stage-accent-text: var(--jccf-stage-accent-text);
+  --color-glow: var(--jccf-glow);
+  --color-live: var(--jccf-live);
+}
+
+@theme {
+  /* Typefaces (Google Fonts, loaded with next/font) */
+  --font-display: var(--font-anton), "Anton", "Arial Narrow", Impact, sans-serif;
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* M3 type scale → text-display-lg, text-headline-md, text-body-lg, text-label-sm … */
+  --text-hero: clamp(3rem, 10vw, 8rem);        /* JCCF extension: hero only */
+  --text-hero--line-height: 0.92;
+  --text-display-lg: clamp(2.75rem, 6vw, 3.5625rem);   /* 57/64 at expanded */
+  --text-display-lg--line-height: 1.05;
+  --text-display-md: clamp(2.25rem, 4.8vw, 2.8125rem); /* 45/52 */
+  --text-display-md--line-height: 1.08;
+  --text-display-sm: 2.25rem;                  /* 36/44 */
+  --text-display-sm--line-height: 1.12;
+  --text-headline-lg: 2rem;                    /* 32/40 */
+  --text-headline-lg--line-height: 2.5rem;
+  --text-headline-md: 1.75rem;                 /* 28/36 */
+  --text-headline-md--line-height: 2.25rem;
+  --text-headline-sm: 1.5rem;                  /* 24/32 */
+  --text-headline-sm--line-height: 2rem;
+  --text-title-lg: 1.375rem;                   /* 22/28 */
+  --text-title-lg--line-height: 1.75rem;
+  --text-title-md: 1rem;                       /* 16/24, 600 */
+  --text-title-md--line-height: 1.5rem;
+  --text-title-md--letter-spacing: 0.009375em;
+  --text-title-sm: 0.875rem;                   /* 14/20, 600 */
+  --text-title-sm--line-height: 1.25rem;
+  --text-title-sm--letter-spacing: 0.00714em;
+  --text-body-lg: 1rem;                        /* 16/24 */
+  --text-body-lg--line-height: 1.5rem;
+  --text-body-lg--letter-spacing: 0.03125em;
+  --text-body-md: 0.875rem;                    /* 14/20 */
+  --text-body-md--line-height: 1.25rem;
+  --text-body-md--letter-spacing: 0.0179em;
+  --text-body-sm: 0.75rem;                     /* 12/16 */
+  --text-body-sm--line-height: 1rem;
+  --text-body-sm--letter-spacing: 0.0333em;
+  --text-label-lg: 0.875rem;                   /* 14/20, 600 */
+  --text-label-lg--line-height: 1.25rem;
+  --text-label-lg--letter-spacing: 0.00714em;
+  --text-label-md: 0.75rem;                    /* 12/16, 600 */
+  --text-label-md--line-height: 1rem;
+  --text-label-md--letter-spacing: 0.0417em;
+  --text-label-sm: 0.6875rem;                  /* 11/16, 600 */
+  --text-label-sm--line-height: 1rem;
+  --text-label-sm--letter-spacing: 0.0455em;
+
+  /* Shape scale (M3, with JCCF xl = 24) → rounded-sm … rounded-full */
+  --radius-xs: 0.25rem;   /* 4  */
+  --radius-sm: 0.5rem;    /* 8  */
+  --radius-md: 0.75rem;   /* 12 */
+  --radius-lg: 1rem;      /* 16 */
+  --radius-xl: 1.5rem;    /* 24 cards, hero frame */
+  --radius-2xl: 2rem;     /* 32 big feature panels */
+
+  /* Spacing: 4dp grid (Tailwind default base 0.25rem) — p-4 = 16px etc. */
+  --spacing: 0.25rem;
+
+  /* M3 window size classes → medium:, expanded:, large:, xlarge: */
+  --breakpoint-*: initial;
+  --breakpoint-medium: 37.5rem;    /* 600px  */
+  --breakpoint-expanded: 52.5rem;  /* 840px  */
+  --breakpoint-large: 75rem;       /* 1200px */
+  --breakpoint-xlarge: 100rem;     /* 1600px */
+
+  /* M3 motion: easing → ease-emphasized, ease-emphasized-decelerate … */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --ease-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  /* M3 elevation (use sparingly; prefer tonal surface containers) → shadow-elev-1 … */
+  --shadow-elev-1: 0 1px 2px rgb(0 0 0 / 0.30), 0 1px 3px 1px rgb(0 0 0 / 0.15);
+  --shadow-elev-2: 0 1px 2px rgb(0 0 0 / 0.30), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+  --shadow-elev-3: 0 1px 3px rgb(0 0 0 / 0.30), 0 4px 8px 3px rgb(0 0 0 / 0.15);
+  --shadow-elev-4: 0 2px 3px rgb(0 0 0 / 0.30), 0 6px 10px 4px rgb(0 0 0 / 0.15);
+  --shadow-elev-5: 0 4px 4px rgb(0 0 0 / 0.30), 0 8px 12px 6px rgb(0 0 0 / 0.15);
+
+  /* Content widths */
+  --container-content: 75rem;   /* 1200 max page width */
+  --container-prose: 42rem;     /* 672 reading width */
+
+  /* Animations used by the motion system */
+  --animate-live-pulse: live-pulse 1.6s var(--ease-standard) infinite;
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+/* M3 durations (use in JS + arbitrary values: duration-[var(--md-dur-medium2)]) */
+:root {
+  --md-dur-short1: 50ms;  --md-dur-short2: 100ms; --md-dur-short3: 150ms; --md-dur-short4: 200ms;
+  --md-dur-medium1: 250ms; --md-dur-medium2: 300ms; --md-dur-medium3: 350ms; --md-dur-medium4: 400ms;
+  --md-dur-long1: 450ms;  --md-dur-long2: 500ms;  --md-dur-long3: 550ms;  --md-dur-long4: 600ms;
+  --md-dur-xlong1: 700ms; --md-dur-xlong2: 800ms; --md-dur-xlong3: 900ms; --md-dur-xlong4: 1000ms;
+}
+
+@keyframes live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgb(250 4 4 / 0.6); }
+  70%  { box-shadow: 0 0 0 10px rgb(250 4 4 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(250 4 4 / 0); }
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- 3. Base + component layer ---------- */
+@layer base {
+  html { color-scheme: light; -webkit-tap-highlight-color: transparent; }
+  html.dark { color-scheme: dark; }
+  body { @apply bg-surface text-on-surface font-sans text-body-lg antialiased; }
+  /* Display + headline styles are condensed caps */
+  .type-hero, .type-display, .type-headline { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; font-weight: 400; }
+  :focus-visible { outline: 3px solid var(--md-sys-color-primary); outline-offset: 2px; border-radius: 4px; }
+  .theme-stage :focus-visible { outline-color: var(--jccf-glow); }
+}
+
+@layer components {
+  /* An always-dark brand section. Remaps on-surface so children "just work". */
+  .theme-stage {
+    background-color: var(--jccf-stage);
+    color: var(--jccf-on-stage);
+    --md-sys-color-surface: var(--jccf-stage);
+    --md-sys-color-on-surface: var(--jccf-on-stage);
+    --md-sys-color-on-surface-variant: var(--jccf-on-stage-variant);
+    --md-sys-color-outline-variant: var(--jccf-stage-outline);
+    --md-sys-color-surface-container: var(--jccf-stage-container);
+    --md-sys-color-surface-container-high: var(--jccf-stage-container-high);
+    /* Red buttons on stage stay red with white text in both modes (5.4:1) */
+    --md-sys-color-primary: #d60000;
+    --md-sys-color-on-primary: #ffffff;
+  }
+
+  /* The Give band: the one large red area (DESIGN §C17). Same in both modes. */
+  .theme-brand-red {
+    background-color: #bc0001;
+    color: #ffffff;
+    --md-sys-color-on-surface: #ffffff;
+    --md-sys-color-on-surface-variant: rgb(255 255 255 / 0.86);
+  }
+
+  /* A light surface placed inside a stage (finder bar, give card): restores light roles */
+  .theme-light {
+    background-color: var(--md-sys-color-surface-container-lowest);
+    color: var(--md-sys-color-on-surface);
+    --md-sys-color-primary: #bc0001;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-surface: #fffbff;
+    --md-sys-color-on-surface: #1f1a1a;
+    --md-sys-color-on-surface-variant: #504442;
+    --md-sys-color-outline-variant: #d4c3c0;
+    --md-sys-color-surface-container: #f9eeed;
+    --md-sys-color-surface-container-high: #f3e9e7;
+  }
+  .dark .theme-light {
+    --md-sys-color-primary: #ffb4a8;
+    --md-sys-color-on-primary: #690000;
+    --md-sys-color-surface: #171212;
+    --md-sys-color-on-surface: #ebe0de;
+    --md-sys-color-on-surface-variant: #d4c3c0;
+    --md-sys-color-outline-variant: #504442;
+    --md-sys-color-surface-container: #231e1e;
+    --md-sys-color-surface-container-high: #2e2928;
+  }
+
+  /* M3 state layer: add to any interactive element */
+  .state-layer { position: relative; isolation: isolate; overflow: hidden; }
+  .state-layer::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor;
+    opacity: 0; transition: opacity var(--md-dur-short4) var(--ease-standard); pointer-events: none; z-index: -1;
+  }
+  .state-layer:hover::after { opacity: var(--md-state-hover); }
+  .state-layer:focus-visible::after { opacity: var(--md-state-focus); }
+  .state-layer:active::after { opacity: var(--md-state-pressed); }
+}
+
+/* ---------- 4. Reduced motion: every animation off ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+}
