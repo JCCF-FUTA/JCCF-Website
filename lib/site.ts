@@ -87,3 +87,11 @@ export const FOOTER_NAV: { title: string; links: NavItem[] }[] = [
     ],
   },
 ];
+
+/** Footer "Programmes" column: each links to the newest programme of that kind (falls back to /programmes). */
+export const FOOTER_PROGRAMMES: { label: string; kind: string }[] = [
+  { label: 'Prayer and Prophetic Week', kind: 'Prayer and Prophetic Week' },
+  { label: 'Teaching Week', kind: 'Teaching Week' },
+  { label: 'Workers’ Retreat', kind: 'Workers’ Retreat' },
+  { label: 'Handover Service', kind: 'Handover Service' },
+];

@@ -38,7 +38,7 @@ export default async function GivePage() {
           </div>
           <dl className="divide-y divide-outline-variant border-y border-outline-variant expanded:col-span-8">
             {[
-              { title: 'Household programmes', text: 'Combined services, the Week of Prayers and Teaching Week: venues, sound, publicity and guest ministers.' },
+              { title: 'Household programmes', text: 'Combined services, the Prayer and Prophetic Week and Teaching Week: venues, sound, publicity and guest ministers.' },
               { title: 'Welfare', text: 'Care for Christians on campus, including the academic, social and spiritual needs of students (constitution, Article 2).' },
               { title: 'Outreach', text: 'Evangelism on campus and beyond, and support for the units that serve every programme.' },
             ].map((t) => (

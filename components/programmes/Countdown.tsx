@@ -72,7 +72,7 @@ export function Countdown({ title, href, start, end, dateLine, now: serverNow, v
       </div>
       <div>
         {hideTitle ? null : href ? (
-          <Link href={href} className="text-title-lg font-semibold hover:underline underline-offset-4">{title}</Link>
+          <Link href={href} className="text-title-lg font-semibold transition-opacity hover:opacity-80">{title}</Link>
         ) : (
           <p className="text-title-lg font-semibold">{title}</p>
         )}

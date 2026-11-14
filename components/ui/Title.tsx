@@ -14,8 +14,8 @@ function lines(s: string) {
 }
 
 /**
- * Display title with one highlighted word or phrase, marked with *asterisks*:
- * "One Household, *many fellowships*". The highlight is red with an underline sweep (M3 + M11).
+ * Display title with an optional highlighted phrase marked with *asterisks*: "Till we all come … *of the faith*".
+ * The highlight is red only, never underlined. Use it only in the Home hero and the Give card (DESIGN §17).
  */
 export function Title({
   text,
@@ -57,7 +57,6 @@ export function Title({
         i % 2 === 1 ? (
           <span key={i} className={cn('hl', tone === 'stage' ? 'text-stage-accent' : 'text-primary')} data-hl>
             {lines(part)}
-            <span className="hl-bar" data-hl-bar aria-hidden="true" />
           </span>
         ) : (
           <Fragment key={i}>{lines(part)}</Fragment>

@@ -17,7 +17,7 @@ export function LiveBanner({ title }: { title?: string }) {
         <span className="size-2 shrink-0 rounded-full bg-white animate-live-pulse" aria-hidden="true" />
         <span className="shrink-0 text-label-md font-semibold uppercase">We are live</span>
         <span className="hidden min-w-0 truncate text-body-md text-white/90 medium:block">{title}</span>
-        <Link href="/media#live" className="ml-auto inline-flex min-h-12 shrink-0 items-center gap-1 text-label-lg font-semibold underline-offset-4 hover:underline">
+        <Link href="/media#live" className="ml-auto inline-flex min-h-12 shrink-0 items-center gap-1 text-label-lg font-semibold">
           Watch now<span className="sr-only">: {title}</span> <Icon name="arrow_forward" size={20} />
         </Link>
         <button

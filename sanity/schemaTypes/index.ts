@@ -239,7 +239,12 @@ const siteSettings = defineType({
     defineField({ name: 'phone', type: 'string', group: 'contact' }),
     defineField({ name: 'address', title: 'Secretariat address', type: 'text', rows: 2, group: 'contact' }),
     defineField({ name: 'mapUrl', title: 'Map link', type: 'url', group: 'contact' }),
-    defineField({ name: 'socials', type: 'object', group: 'contact', fields: [{ name: 'instagram', type: 'url' }, { name: 'facebook', type: 'url' }, { name: 'youtube', type: 'url' }, { name: 'whatsapp', type: 'url' }] }),
+    defineField({
+      name: 'socials',
+      type: 'object',
+      group: 'contact',
+      fields: [{ name: 'instagram', type: 'url' }, { name: 'facebook', type: 'url' }, { name: 'telegram', type: 'url' }, { name: 'youtube', type: 'url' }, { name: 'whatsapp', type: 'url' }],
+    }),
   ],
   preview: { prepare: () => ({ title: 'Site settings' }) },
 });

@@ -10,12 +10,11 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'Find a fellowship',
-  description: 'Every registered Protestant fellowship and Christian group at FUTA. Search by name, meeting day or venue and visit one this week.',
+  description: 'Every registered Protestant fellowship and Christian group at FUTA. Search by name and visit one this week.',
 };
 
 export default async function FellowshipsPage() {
   const fellowships = await getFellowships();
-  const venues = [...new Set(fellowships.map((f) => f.venue).filter(Boolean) as string[])].sort();
   return (
     <>
       <PageHero
@@ -23,7 +22,7 @@ export default async function FellowshipsPage() {
         compact
         image={{ ...PHOTOS.hall, alt: '' }}
         title="Find a fellowship"
-        intro={`${fellowships.length} fellowships and Christian groups, one Household. Filter by meeting day or venue and visit one this week.`}
+        intro={`${fellowships.length} fellowships and Christian groups, one Household. Search by name and visit one this week.`}
       />
       <section aria-label="Fellowships" className="relative pb-24">
         <div className="container-page">
@@ -34,7 +33,7 @@ export default async function FellowshipsPage() {
               </ul>
             }
           >
-            <FellowshipExplorer fellowships={fellowships} venues={venues} />
+            <FellowshipExplorer fellowships={fellowships} />
           </Suspense>
           <p className="mt-12 max-w-prose text-body-lg text-on-surface-variant">
             Is your fellowship’s information wrong or missing? Ask your president to send the update to the Publicity Unit through the{' '}

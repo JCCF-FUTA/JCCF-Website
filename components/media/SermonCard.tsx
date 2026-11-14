@@ -11,7 +11,7 @@ export function SermonCard({ v, tone = 'light', priority }: { v: Video; tone?: '
       <LiteYouTube id={v.id} title={v.title} thumbnail={v.thumbnail} duration={v.duration} sizes="(min-width: 840px) 33vw, (min-width: 600px) 50vw, 85vw" priority={priority} className="rounded-lg" />
       <div>
         <h3 className="line-clamp-2 text-title-md font-semibold">
-          <a href={youtubeUrls.watch(v.id)} target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">{v.title}</a>
+          <a href={youtubeUrls.watch(v.id)} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-primary">{v.title}</a>
         </h3>
         <p className={cn('mt-1 text-body-sm', tone === 'stage' ? 'text-on-stage-variant' : 'text-on-surface-variant')}>
           {[v.published && formatLongDate(v.published), v.series].filter(Boolean).join(' · ')}

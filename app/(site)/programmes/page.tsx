@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import { getFeaturedProgramme, getPastProgrammes, getSiteSettings, getUpcomingProgrammes } from '@/lib/data';
+import { getFeaturedProgramme, getPastProgrammes, getUpcomingProgrammes } from '@/lib/data';
 import { FeaturedProgramme, ProgrammeCard } from '@/components/programmes/ProgrammeCard';
-import { NewsletterCard } from '@/components/engage/NewsletterCard';
 import { Icon } from '@/components/ui/Icon';
 import { PageHero } from '@/components/ui/PageHero';
 import { Tabs } from '@/components/ui/Tabs';
@@ -11,7 +10,7 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'Programmes',
-  description: 'Upcoming and past Household programmes of JCCF FUTA: combined services, the Week of Prayers, Change of Pulpit, Teaching Week and more.',
+  description: 'Upcoming and past Household programmes of JCCF FUTA: combined services, the Prayer and Prophetic Week, Change of Pulpit, Teaching Week and more.',
 };
 
 function Grid({ items, now, empty }: { items: Programme[]; now: number; empty: string }) {
@@ -32,8 +31,8 @@ function Grid({ items, now, empty }: { items: Programme[]; now: number; empty: s
 
 export default async function ProgrammesPage() {
   const now = Date.now();
-  const [featured, upcoming, past, settings] = await Promise.all([
-    getFeaturedProgramme(now), getUpcomingProgrammes(now), getPastProgrammes(now), getSiteSettings(),
+  const [featured, upcoming, past] = await Promise.all([
+    getFeaturedProgramme(now), getUpcomingProgrammes(now), getPastProgrammes(now),
   ]);
   return (
     <>
@@ -55,9 +54,6 @@ export default async function ProgrammesPage() {
               { label: 'Past', count: past.length, panel: <Grid items={past} now={now} empty="No past programmes yet." /> },
             ]}
           />
-          <div className="mt-16">
-            <NewsletterCard source="programmes" whatsapp={settings.whatsappChannel} wide />
-          </div>
         </div>
       </section>
     </>

@@ -120,7 +120,7 @@ export type SiteSettings = {
   phone?: string;
   address?: string;
   mapUrl?: string;
-  socials: { instagram?: string; facebook?: string; youtube?: string; whatsapp?: string };
+  socials: { instagram?: string; facebook?: string; telegram?: string; youtube?: string; whatsapp?: string };
   stats: { value: number; suffix?: string; label: string; note?: string }[];
   liveWindows: LiveWindow[];
   pinnedVideoId?: string;

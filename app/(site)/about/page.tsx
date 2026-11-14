@@ -152,7 +152,7 @@ export default async function AboutPage() {
         <div className="container-page flex flex-col items-start gap-6 expanded:flex-row expanded:items-center expanded:justify-between">
           <div>
             <h2 className="type-headline text-headline-lg">Visit a fellowship this week</h2>
-            <p className="mt-2 max-w-[52ch] text-body-lg text-on-surface-variant">Search the fellowships by meeting day or venue, then go along. Every one of them belongs to the Household.</p>
+            <p className="mt-2 max-w-[52ch] text-body-lg text-on-surface-variant">Search the fellowships by name, then go along. Every one of them belongs to the Household.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <LinkButton href="/fellowships" trailingIcon="arrow_forward">Find a fellowship</LinkButton>

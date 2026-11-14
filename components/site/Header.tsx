@@ -10,7 +10,6 @@ import type { LiveStatus, SiteSettings } from '@/lib/types';
 import { LinkButton } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { Brand } from '@/components/ui/Brand';
-import { ThemeToggle } from './ThemeToggle';
 import { LiveBanner } from './LiveBanner';
 
 type Socials = SiteSettings['socials'];
@@ -115,8 +114,6 @@ export function Header({ live, socials }: { live: LiveStatus; socials: Socials }
               </Link>
             )}
 
-            <ThemeToggle className={cn('hidden medium:inline-flex', solid ? 'text-on-surface' : 'text-white')} />
-
             <LinkButton href="/give" size="sm" tone={solid ? 'light' : 'stage'} className="ml-1" icon="volunteer_activism">
               Give
             </LinkButton>
@@ -174,9 +171,10 @@ function NavDrawer({
   const socialLinks = [
     { key: 'instagram', href: socials.instagram, label: 'Instagram' },
     { key: 'facebook', href: socials.facebook, label: 'Facebook' },
+    { key: 'telegram', href: socials.telegram, label: 'Telegram' },
     { key: 'youtube', href: socials.youtube, label: 'YouTube' },
     { key: 'whatsapp', href: socials.whatsapp, label: 'WhatsApp' },
-  ].filter((s) => s.href) as { key: 'instagram' | 'facebook' | 'youtube' | 'whatsapp'; href: string; label: string }[];
+  ].filter((s) => s.href) as { key: 'instagram' | 'facebook' | 'telegram' | 'youtube' | 'whatsapp'; href: string; label: string }[];
 
   return (
     <dialog
@@ -189,12 +187,9 @@ function NavDrawer({
       <div className="container-page flex min-h-full flex-col pb-8">
         <div className="flex h-16 items-center justify-between expanded:h-18">
           <span className="font-display text-[1.375rem] uppercase tracking-wide">Menu</span>
-          <div className="flex items-center gap-1">
-            <ThemeToggle className="text-white" />
-            <button type="button" onClick={onClose} aria-label="Close menu" className="state-layer -mr-2 inline-flex size-12 items-center justify-center rounded-full">
-              <Icon name="close" />
-            </button>
-          </div>
+          <button type="button" onClick={onClose} aria-label="Close menu" className="state-layer -mr-2 inline-flex size-12 items-center justify-center rounded-full">
+            <Icon name="close" />
+          </button>
         </div>
 
         <nav aria-label="Menu" className="mt-6 flex-1">

@@ -37,24 +37,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0a0a0a' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
+  themeColor: '#0a0a0a',
   width: 'device-width',
   initialScale: 1,
 };
 
 /**
- * Runs before paint: applies the saved/system theme (no flash, DESIGN §C27) and enables
- * motion start states only when motion is allowed (DESIGN §8.4). If the motion script hasn't
+ * Runs before paint: enables motion start states only when motion is allowed (DESIGN §8.4). If the motion script hasn't
  * started within 2.5 s (slow network), content is simply shown.
  */
-const headScript = `(function(){try{var r=document.documentElement,t=localStorage.getItem('theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;if(d)r.classList.add('dark');}catch(e){}try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var h=document.documentElement;h.classList.add('js-motion');setTimeout(function(){if(!window.__jccfMotion)h.classList.remove('js-motion')},2500)}}catch(e){}})();`;
+const headScript = `(function(){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var h=document.documentElement;h.classList.add('js-motion');setTimeout(function(){if(!window.__jccfMotion)h.classList.remove('js-motion')},2500)}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-NG" className={`${anton.variable} ${jakarta.variable}`} suppressHydrationWarning>
+    <html lang="en-NG" className={`${anton.variable} ${jakarta.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: headScript }} />
       </head>

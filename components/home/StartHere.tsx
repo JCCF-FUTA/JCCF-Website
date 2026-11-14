@@ -20,7 +20,7 @@ export function StartHere({ fellowshipCount, photo, sermon }: { fellowshipCount:
         <div className="relative flex flex-col items-start gap-3 p-6 expanded:p-8">
           <h3 className="font-display text-headline-lg uppercase">Find a fellowship</h3>
           <p className="max-w-[40ch] text-body-lg text-white">
-            {fellowshipCount} registered fellowships and Christian groups. Search by name, meeting day or venue and visit one this week.
+            {fellowshipCount} registered fellowships and Christian groups. Search by name and visit one this week.
           </p>
           <span className="mt-2 inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-label-lg font-semibold text-stage">
             Search fellowships <Icon name="arrow_forward" size={20} className="transition-transform duration-300 group-hover:translate-x-1" />

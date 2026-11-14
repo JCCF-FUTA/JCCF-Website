@@ -6,8 +6,7 @@
    ===================================================================== */
 @import "tailwindcss";
 
-/* Dark mode follows the .dark class on <html> (set from system preference + toggle) */
-@custom-variant dark (&:where(.dark, .dark *));
+/* Light mode only (dark mode removed Nov 2026 at the team's request). Stage sections stay dark by design. */
 
 /* ---------- 1. Reference + system colour tokens (M3 roles) ---------- */
 :root {
@@ -45,8 +44,7 @@
   --md-sys-color-outline-variant: #d4c3c0;
   --md-sys-color-scrim: #000000;
 
-  /* "Stage": the always-dark brand sections (hero, live, programmes, give band).
-     Same in light and dark mode. */
+  /* "Stage": the always-dark brand sections (hero, live, programmes, give band). */
   --jccf-stage: #0a0a0a;
   --jccf-stage-container: #161616;
   --jccf-stage-container-high: #222222;
@@ -65,40 +63,6 @@
   --md-state-dragged: 0.16;
   --md-state-disabled-content: 0.38;
   --md-state-disabled-container: 0.12;
-}
-
-.dark {
-  --md-sys-color-primary: #ffb4a8;
-  --md-sys-color-on-primary: #690000;
-  --md-sys-color-primary-container: #ff5541;
-  --md-sys-color-on-primary-container: #2f0000;
-  --md-sys-color-secondary: #ffb4a8;
-  --md-sys-color-on-secondary: #690000;
-  --md-sys-color-secondary-container: #930201;
-  --md-sys-color-on-secondary-container: #ff9a8a;
-  --md-sys-color-tertiary: #e2c600;
-  --md-sys-color-on-tertiary: #383000;
-  --md-sys-color-tertiary-container: #524700;
-  --md-sys-color-on-tertiary-container: #ffe339;
-  --md-sys-color-error: #ffb4ab;
-  --md-sys-color-on-error: #690005;
-  --md-sys-color-error-container: #93000a;
-  --md-sys-color-on-error-container: #ffdad6;
-  --md-sys-color-surface: #171212;
-  --md-sys-color-on-surface: #ebe0de;
-  --md-sys-color-surface-variant: #504442;
-  --md-sys-color-on-surface-variant: #d4c3c0;
-  --md-sys-color-surface-container-lowest: #110d0c;
-  --md-sys-color-surface-container-low: #1f1a1a;
-  --md-sys-color-surface-container: #231e1e;
-  --md-sys-color-surface-container-high: #2e2928;
-  --md-sys-color-surface-container-highest: #393332;
-  --md-sys-color-surface-dim: #171212;
-  --md-sys-color-inverse-surface: #ebe0de;
-  --md-sys-color-inverse-on-surface: #352f2e;
-  --md-sys-color-inverse-primary: #c00001;
-  --md-sys-color-outline: #9d8d8b;
-  --md-sys-color-outline-variant: #504442;
 }
 
 /* ---------- 2. Tailwind theme: utilities generated from the tokens ---------- */
@@ -256,7 +220,6 @@
 /* ---------- 3. Base + component layer ---------- */
 @layer base {
   html { color-scheme: light; -webkit-tap-highlight-color: transparent; }
-  html.dark { color-scheme: dark; }
   body { @apply bg-surface text-on-surface font-sans text-body-lg antialiased; }
   /* Display + headline styles are condensed caps */
   .type-hero, .type-display, .type-headline { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; font-weight: 400; }
@@ -300,16 +263,6 @@
     --md-sys-color-outline-variant: #d4c3c0;
     --md-sys-color-surface-container: #f9eeed;
     --md-sys-color-surface-container-high: #f3e9e7;
-  }
-  .dark .theme-light {
-    --md-sys-color-primary: #ffb4a8;
-    --md-sys-color-on-primary: #690000;
-    --md-sys-color-surface: #171212;
-    --md-sys-color-on-surface: #ebe0de;
-    --md-sys-color-on-surface-variant: #d4c3c0;
-    --md-sys-color-outline-variant: #504442;
-    --md-sys-color-surface-container: #231e1e;
-    --md-sys-color-surface-container-high: #2e2928;
   }
 
   /* M3 state layer: add to any interactive element */

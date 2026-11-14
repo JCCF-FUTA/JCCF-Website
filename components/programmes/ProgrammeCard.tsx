@@ -97,7 +97,7 @@ export function FeaturedProgramme({ p, tone = 'stage', now }: { p: Programme; to
         <div className="flex flex-col items-start gap-3">
           <SampleChip p={p} stage={stage} />
           <h3 className="font-display text-headline-lg uppercase expanded:text-display-sm">
-            <Link href={`/programmes/${p.slug}`} className="underline-offset-4 hover:underline">{p.title}</Link>
+            <Link href={`/programmes/${p.slug}`} className="transition-opacity hover:opacity-80">{p.title}</Link>
           </h3>
           {p.summary && <p className={cn('max-w-[52ch] text-body-lg', stage ? 'text-on-stage-variant' : 'text-on-surface-variant')}>{p.summary}</p>}
         </div>

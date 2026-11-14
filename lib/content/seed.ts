@@ -169,16 +169,16 @@ export const FELLOWSHIPS: Fellowship[] = REGISTERED.map(([name, shortName], i) =
 export const PROGRAMMES: Programme[] = [
   {
     // PLACEHOLDER dates — confirm with the Household Executive.
-    slug: 'week-of-prayers-2027',
-    title: 'Week of Prayers 2027',
-    kind: 'Week of Prayers',
+    slug: 'prayer-and-prophetic-week-2027',
+    title: 'Prayer and Prophetic Week 2027',
+    kind: 'Prayer and Prophetic Week',
     theme: 'Theme to be announced',
     start: '2027-01-18T17:00:00+01:00',
     end: '2027-01-24T19:00:00+01:00',
     venue: 'Chapel of Faith Auditorium, FUTA',
     summary: 'Seven evenings of prayer as one Household. Every fellowship suspends its meetings and we gather together.',
     body: paragraphs(
-      'The Week of Prayers is one of the Household programmes set by the JCCF constitution. For seven days, students from every constituent fellowship gather to pray for the campus, for the nation and for one another.',
+      'The Prayer and Prophetic Week is the week of prayers set by the JCCF constitution as a Household programme. For seven days, students from every constituent fellowship gather to pray for the campus, for the nation and for one another.',
       'During Household programmes, member fellowships suspend their own meetings so that the whole Household can meet as one.',
     ),
     featured: true,
@@ -362,18 +362,20 @@ export const GALLERY: GalleryAlbum[] = [
 
 export const SITE_SETTINGS: SiteSettings = {
   isLive: false,
-  featuredProgrammeSlug: 'week-of-prayers-2027',
+  featuredProgrammeSlug: 'prayer-and-prophetic-week-2027',
   // PLACEHOLDER contact details — confirm with the General Secretary.
-  whatsappChannel: undefined,
+  // Real channels, taken from the previous official site (jccf-futa.onrender.com).
+  whatsappChannel: 'https://whatsapp.com/channel/0029Vay9yRR3wtb1yrhKOh3w',
   email: 'info@jccffuta.org',
   phone: undefined,
   address: 'JCCF Secretariat, Federal University of Technology, Akure, Ondo State',
   mapUrl: 'https://maps.google.com/?q=Federal+University+of+Technology+Akure',
   socials: {
     youtube: 'https://www.youtube.com/@jccf_futa',
-    instagram: undefined,
-    facebook: undefined,
-    whatsapp: undefined,
+    instagram: 'https://www.instagram.com/jccffuta_gram/',
+    facebook: 'https://www.facebook.com/people/JCCF-FUTA/100067526830978/',
+    telegram: 'https://t.me/jccf_futa',
+    whatsapp: 'https://whatsapp.com/channel/0029Vay9yRR3wtb1yrhKOh3w',
   },
   stats: [
     { value: 30, label: 'years as one Household', note: 'Started as a joint prayer gathering in 1996/97' },
@@ -399,7 +401,7 @@ export const GIVE_SETTINGS: GiveSettings = {
   categories: [
     { id: 'offering', label: 'Offering', kind: 'offering', open: true, description: 'Your regular offering to the Household.' },
     { id: 'partnership', label: 'Partnership', kind: 'partnership', open: true, description: 'Support the Household’s ongoing work: programmes, welfare and outreach.' },
-    { id: 'week-of-prayers-2027', label: 'Week of Prayers 2027', kind: 'project', open: true, description: 'Help fund the Week of Prayers.' },
+    { id: 'prayer-and-prophetic-week-2027', label: 'Prayer and Prophetic Week 2027', kind: 'project', open: true, description: 'Help fund the Prayer and Prophetic Week.' },
   ],
   presetAmounts: [1000, 2000, 5000, 10000],
 };
