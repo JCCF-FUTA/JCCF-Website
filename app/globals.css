@@ -64,7 +64,6 @@
   /* Marquee (M8) */
   .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
 
-  .hl { position: relative; display: inline-block; }
 
   /* Prose (DESIGN §C30) */
   .prose-jccf { max-width: var(--container-prose); font-size: 1rem; line-height: 1.7; }

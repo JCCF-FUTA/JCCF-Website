@@ -166,59 +166,48 @@ export const FELLOWSHIPS: Fellowship[] = REGISTERED.map(([name, shortName], i) =
 
 /* ─────────────────────────── Programmes ─────────────────────────── */
 
+const FUTA_PRAYS = 'The Household prays together for the Federal University of Technology, Akure: its students, staff and management.';
+const PULPIT_ROTATION =
+  'Presidents of registered fellowships are assigned by the Household Executive to join and minister in other fellowships for the day. It builds love and unity among the fellowships on campus (constitution: “Change of Pulpit”).';
+
+/** One calendar entry (date only; all-day in Africa/Lagos). */
+function cal(slug: string, title: string, kind: string, startDate: string, endDate: string | undefined, summary: string, featured = false): Programme[] {
+  return [{
+    slug,
+    title,
+    kind,
+    start: `${startDate}T00:00:00+01:00`,
+    end: `${endDate ?? startDate}T23:59:00+01:00`,
+    allDay: true,
+    summary,
+    body: paragraphs(summary, 'The time and venue will be announced on our WhatsApp channel and in the newsletter.'),
+    featured,
+  }];
+}
+
 export const PROGRAMMES: Programme[] = [
-  {
-    // PLACEHOLDER dates — confirm with the Household Executive.
-    slug: 'prayer-and-prophetic-week-2027',
-    title: 'Prayer and Prophetic Week 2027',
-    kind: 'Prayer and Prophetic Week',
-    theme: 'Theme to be announced',
-    start: '2027-01-18T17:00:00+01:00',
-    end: '2027-01-24T19:00:00+01:00',
-    venue: 'Chapel of Faith Auditorium, FUTA',
-    summary: 'Seven evenings of prayer as one Household. Every fellowship suspends its meetings and we gather together.',
-    body: paragraphs(
-      'The Prayer and Prophetic Week is the week of prayers set by the JCCF constitution as a Household programme. For seven days, students from every constituent fellowship gather to pray for the campus, for the nation and for one another.',
-      'During Household programmes, member fellowships suspend their own meetings so that the whole Household can meet as one.',
-    ),
-    featured: true,
-    placeholder: true,
-  },
-  {
-    slug: 'combined-sunday-service-feb-2027',
-    title: 'Combined Sunday Service',
-    kind: 'Combined Sunday Service',
-    start: '2027-02-14T16:00:00+01:00',
-    end: '2027-02-14T19:00:00+01:00',
-    venue: 'Chapel of Faith Auditorium, FUTA',
-    summary: 'All constituent fellowships worship together as one Household.',
-    body: paragraphs(
-      'The constitution sets at least two combined Sunday programmes every session. Fellowships suspend their own services and the whole Household worships together.',
-    ),
-    placeholder: true,
-  },
-  {
-    slug: 'change-of-pulpit-2027',
-    title: 'Change of Pulpit',
-    kind: 'Change of Pulpit',
-    start: '2027-03-07T08:00:00+01:00',
-    venue: 'Constituent fellowships across campus',
-    summary: 'Fellowship presidents swap pulpits for a Sunday to build love and unity across the Household.',
-    body: paragraphs(
-      'Change of Pulpit is a fellowship exchange: the Household Executive assigns presidents of registered fellowships to join and minister in other fellowships for a day. It builds love and unity among the fellowships on campus.',
-    ),
-    placeholder: true,
-  },
-  {
-    slug: 'teaching-week-2027',
-    title: 'Teaching Week 2027',
-    kind: 'Teaching Week',
-    start: '2027-06-14T17:00:00+01:00',
-    end: '2027-06-20T19:00:00+01:00',
-    venue: 'Chapel of Faith Auditorium, FUTA',
-    summary: 'A week of teaching from the Word for the whole Household.',
-    placeholder: true,
-  },
+  // ── 2026/27 session: from the official JCCF Calendar 2026/27 (JCCF Calendar .pdf). ──
+  // The calendar gives dates only, so these are all-day: no times or venues until the executive announces them.
+  // COP meeting dates are internal and deliberately not listed.
+  ...cal('jccf-cop-retreat-2026', 'JCCF COP Retreat', 'COP Retreat', '2026-10-17', undefined,
+    'A retreat for the JCCF Committee of Presidents (JCCFCOP): the Household Executive and the presidents of the constituent fellowships.'),
+  ...cal('futa-prays-nov-2026', 'FUTA Prays: November 2026', 'FUTA Prays', '2026-11-02', undefined, FUTA_PRAYS),
+  ...cal('workers-retreat-2026', 'JCCF Workers’ Retreat', 'Workers’ Retreat', '2026-11-14', undefined,
+    'A retreat for the workers of the Household and its units.'),
+  ...cal('freshers-orientation-2026', 'JCCF Freshers’ Orientation', 'Freshers’ Orientation', '2026-11-28', undefined,
+    'For new students: meet the Household, learn how JCCF works and find a fellowship to call home.'),
+  ...cal('futa-prays-dec-2026', 'FUTA Prays: December 2026', 'FUTA Prays', '2026-12-01', undefined, FUTA_PRAYS),
+  ...cal('pulpit-rotation-dec-2026', 'JCCF Pulpit Rotation', 'Pulpit Rotation', '2026-12-13', undefined, PULPIT_ROTATION),
+  ...cal('prayer-and-prophetic-week-2027', 'Prayer and Prophetic Week 2027', 'Prayer and Prophetic Week', '2027-01-25', '2027-01-31',
+    'Seven days of prayer as one Household, the week of prayers set by the JCCF constitution.', true),
+  ...cal('futa-prays-feb-2027', 'FUTA Prays: February 2027', 'FUTA Prays', '2027-02-01', undefined, FUTA_PRAYS),
+  ...cal('pulpit-rotation-apr-2027', 'JCCF Pulpit Rotation', 'Pulpit Rotation', '2027-04-25', undefined, PULPIT_ROTATION),
+  ...cal('futa-prays-may-2027', 'FUTA Prays: May 2027', 'FUTA Prays', '2027-05-03', undefined, FUTA_PRAYS),
+  ...cal('teaching-week-2027', 'Teaching Week 2027', 'Teaching Week', '2027-05-10', '2027-05-16',
+    'A week of teaching from the Word for the whole Household.'),
+  ...cal('futa-prays-jun-2027', 'FUTA Prays: June 2027', 'FUTA Prays', '2027-06-01', undefined, FUTA_PRAYS),
+  ...cal('handover-service-2027', 'Handover Service 2027', 'Handover Service', '2027-06-06', undefined,
+    'The outgoing Household Executive hands over to the new executive, and final-year brethren give thanks.'),
   // ── Past (from the YouTube channel) ──
   {
     slug: 'handover-service-2026',
@@ -256,6 +245,12 @@ export const PROGRAMMES: Programme[] = [
   },
 ];
 
+/** "Other programs" on the JCCF Calendar 2026/27: run through the session, no fixed dates. */
+export const OTHER_PROGRAMMES: { title: string; text: string }[] = [
+  { title: 'Prayer Walks', text: 'The Household walks and prays across campus. Dates are shared on our WhatsApp channel and in the newsletter.' },
+  { title: 'Transformation Webinar Series', text: 'Online teaching sessions through the session. Links are shared on our WhatsApp channel and in the newsletter.' },
+];
+
 /* ─────────────────────────── Leadership ─────────────────────────── */
 
 const TBC = 'Name to be confirmed';
@@ -272,10 +267,11 @@ export const LEADERS: Leader[] = [
   { name: TBC, office: 'Choir Coordinator', group: 'unit', order: 8, placeholder: true },
   { name: TBC, office: 'Drama Coordinator', group: 'unit', order: 9, placeholder: true },
   { name: TBC, office: 'Ushering Coordinator', group: 'unit', order: 10, placeholder: true },
-  // From Appendix V (2024). Confirm titles before launch.
-  { name: 'Venerable Lasehinde', office: 'Grand Patron', group: 'adviser', order: 20 },
-  { name: 'Prof. Okunlola', office: 'Staff Adviser', group: 'adviser', order: 21 },
-  { name: 'Prof. Olukunle', office: 'Staff Adviser', group: 'adviser', order: 22 },
+  // From the JCCF Calendar 2026/27 (official, Nov 2026).
+  { name: 'Prof. E. O. Laseinde', office: 'Grand Patron', group: 'adviser', order: 20 },
+  { name: 'Dr (Mrs) M. O. Ajayi', office: 'Patroness', group: 'adviser', order: 21 },
+  { name: 'Prof. Niyi Okunlola', office: 'Staff Adviser', group: 'adviser', order: 22 },
+  { name: 'Prof. O. J. Olukunle', office: 'Staff Adviser', group: 'adviser', order: 23 },
 ];
 
 /* ─────────────────────────── Posts ─────────────────────────── */

@@ -19,7 +19,7 @@
 | Type | **Anton** (condensed caps) for hero/display/headline. **Plus Jakarta Sans** for everything else. Both Google Fonts. |
 | Shape | Rounded: cards 24px, feature panels 32px, buttons and chips fully round. |
 | Motion | **Rich scroll animation** (GSAP ScrollTrigger + Lenis), lighter on phones, fully off with `prefers-reduced-motion`. |
-| Dark mode | Supported. Follows the system, with a toggle in the header. Stage sections look the same in both modes. |
+| Dark mode | **Removed (Nov 2026): light mode only.** See §17.1. |
 | Images | Until real photos arrive, use **thumbnails from the JCCF YouTube channel** as placeholders (see §10). |
 | Pillars | Built from JCCF's **vision and 7-point mission** (constitution, Article 3). |
 | Icons | **Material Symbols Rounded** (Google), weight 400, as individual SVG imports. |
@@ -561,3 +561,15 @@ Open items to confirm with the JCCF team: logo file (red and yellow hex values),
 | Copy | No slogans, no em-dash asides, no "Welcome to…". Buttons say exactly what happens ("Search fellowships", "Programme details", "Show more sermons"). Scripture is cited in brackets. | — |
 | Touch targets | 48px minimum everywhere, including footer links and the live banner (now 48px tall). | C02 44px |
 | Logo swatches | On About → "What our logo means" only, small 40px swatches use the logo's own colours: green `#06903F`, red `#FA0404`, yellow `#FADD26`, Bible-page cream `#F3EAD2`, white. Not for UI elsewhere. | — |
+
+### 17.1 Team decisions (14 Nov 2026)
+
+| Area | Rule now |
+| --- | --- |
+| Colour mode | **Light mode only.** The dark-mode toggle, `.dark` tokens and the theme script are removed. Stage sections stay dark by design. (Replaces §0 "Dark mode" and C27.) |
+| Underlines | No underlined text on Home: the highlight underline (M11) is gone everywhere, and link hovers use colour or opacity. The red highlight word stays only in the Home hero and the Give card. |
+| Hero | Two buttons: **Find a fellowship** (primary) and Watch sermons. Every action fits inside the first screen from 360×640 to 1440×900. Wide screens: name search in a light card on the right; phones: name search under the buttons. The next programme is one line under the buttons. |
+| Fellowship search | **By name only** (name or abbreviation). Day, venue and type filters are removed. |
+| Give on Home | A photo band with a dark overlay, heading, one line and a **Give to the Household** button to `/give`. The full form lives only on `/give`. |
+| Newsletter | One sign-up only: a full-width band above the footer on every page. The footer form is removed. |
+| Footer | Identity + socials (Instagram, Facebook, Telegram, YouTube, WhatsApp channel) · Explore · Programmes (Prayer and Prophetic Week, Teaching Week, Workers’ Retreat, Handover Service, each linking to its latest edition) · Watch & read · Get involved · Contact · copyright. No "Built by" line. |

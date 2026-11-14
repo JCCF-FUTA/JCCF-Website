@@ -41,9 +41,9 @@ export function formatRange(start: string, end?: string) {
   return `${fmt({ weekday: 'short', day: 'numeric', month: 'short' }).format(s)} – ${formatDate(end)}`;
 }
 
-/** "Sun 14 Feb 2027 · 4:00 PM · Chapel of Faith" */
-export function programmeLine(p: { start: string; end?: string; venue?: string }) {
-  return [formatRange(p.start, p.end), formatTime(p.start), p.venue].filter(Boolean).join(' · ');
+/** "Sun 14 Feb 2027 · 4:00 PM · Chapel of Faith" (no time for all-day programmes) */
+export function programmeLine(p: { start: string; end?: string; venue?: string; allDay?: boolean }) {
+  return [formatRange(p.start, p.end), p.allDay ? null : formatTime(p.start), p.venue].filter(Boolean).join(' · ');
 }
 
 export function relativeDays(iso: string, now = Date.now()) {

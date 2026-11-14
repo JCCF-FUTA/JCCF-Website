@@ -128,7 +128,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
             <dl className="flex flex-col gap-4 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6 expanded:sticky expanded:top-24">
               {[
                 { icon: 'calendar_month', label: 'Date', value: formatRange(p.start, p.end) },
-                { icon: 'schedule', label: 'Time', value: formatTime(p.start) },
+                ...(p.allDay ? [] : [{ icon: 'schedule', label: 'Time', value: formatTime(p.start) }]),
                 ...(p.venue ? [{ icon: 'location_on', label: 'Venue', value: p.venue }] : []),
               ].map((r) => (
                 <div key={r.label} className="flex gap-3">

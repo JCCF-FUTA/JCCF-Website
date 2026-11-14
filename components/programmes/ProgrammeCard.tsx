@@ -63,7 +63,7 @@ export function ProgrammeCard({ p, tone = 'light', now }: { p: Programme; tone?:
         {p.theme && <p className={cn('-mt-1 text-body-lg', stage ? 'text-on-stage-variant' : 'text-on-surface-variant')}>“{p.theme}”</p>}
         <ul className={cn('flex flex-col gap-1.5 text-body-md', stage ? 'text-on-stage-variant' : 'text-on-surface-variant')}>
           <li className="flex items-center gap-2"><Icon name="calendar_month" size={20} /> {formatRange(p.start, p.end)}</li>
-          <li className="flex items-center gap-2"><Icon name="schedule" size={20} /> {formatTime(p.start)}</li>
+          {!p.allDay && <li className="flex items-center gap-2"><Icon name="schedule" size={20} /> {formatTime(p.start)}</li>}
           {p.venue && <li className="flex items-center gap-2"><Icon name="location_on" size={20} /> <span className="line-clamp-1">{p.venue}</span></li>}
         </ul>
         <div className="relative z-10 mt-auto flex items-center gap-1 pt-2">

@@ -12,7 +12,7 @@ export const FELLOWSHIPS_QUERY = `*[_type == "fellowship" && status != "inactive
 export const FELLOWSHIP_QUERY = `*[_type == "fellowship" && slug.current == $slug][0]{ ${fellowshipFields} }`;
 
 export const programmeFields = `
-  "slug": slug.current, title, kind, theme, start, end, venue, mapUrl, summary, body,
+  "slug": slug.current, title, kind, theme, start, end, "allDay": coalesce(allDay, false), venue, mapUrl, summary, body,
   ${img('flyer')}, "ministers": ministers[]{ name, role, ${img('photo')} }, featured, relatedVideoIds`;
 
 export const PROGRAMMES_QUERY = `*[_type == "programme"] | order(start asc){ ${programmeFields} }`;

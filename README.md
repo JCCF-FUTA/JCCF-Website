@@ -78,10 +78,10 @@ Import the repo, add the env vars, set `NEXT_PUBLIC_SITE_URL=https://jccffuta.or
 
 Seed content marked **PLACEHOLDER** (`placeholder: true`) in `lib/content/seed.ts` is *not confirmed*. It appears only in development, labelled **Sample**. Production builds hide it (unconfirmed programmes, executive names and posts disappear; fellowship schedules are not shown). To review layouts with sample content on a preview deployment, set `NEXT_PUBLIC_SHOW_SAMPLE_CONTENT=true`. Replace it in the Studio:
 
-- [ ] Programme names and dates (Week of Prayers 2027, Combined Sunday Service, Change of Pulpit, Teaching Week 2027) and which one is **featured** for the countdown
+- [x] Programme dates for 2026/27 (from the official JCCF Calendar). Still needed: **times, venues and flyers** for each programme (set in the Studio; untick “Time not announced yet”)
 - [ ] Every fellowship’s meeting days, time, venue, president and contacts (send the Excel template to presidents through JCCFCOP). Cards show “Schedule to be confirmed” until then.
 - [ ] Household Executive names, photos, department and level; unit coordinators
-- [ ] Staff advisers and patrons (taken from the 2024 constitution appendix — confirm titles)
+- [x] Staff advisers and patrons (from the JCCF Calendar 2026/27)
 - [ ] Secretariat address, phone, WhatsApp channel, Instagram and Facebook links
 - [ ] Bank name and account number (Give settings, owners only)
 - [ ] The 5-point JCCF Alumni mission (not in the constitution text we have; the alumni page shows a draft)

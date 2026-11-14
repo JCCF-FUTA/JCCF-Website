@@ -53,7 +53,7 @@ export function FinderBar({
             type="search"
             value={v.q}
             onChange={(e) => set({ q: e.target.value })}
-            placeholder="Fellowship name, e.g. SUCF"
+            placeholder="Name, e.g. SUCF"
             className="min-w-0 flex-1 bg-transparent text-body-lg text-on-surface outline-none placeholder:text-on-surface-variant"
             enterKeyHint="search"
           />

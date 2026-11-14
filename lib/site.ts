@@ -94,4 +94,5 @@ export const FOOTER_PROGRAMMES: { label: string; kind: string }[] = [
   { label: 'Teaching Week', kind: 'Teaching Week' },
   { label: 'Workers’ Retreat', kind: 'Workers’ Retreat' },
   { label: 'Handover Service', kind: 'Handover Service' },
+  { label: 'FUTA Prays', kind: 'FUTA Prays' },
 ];

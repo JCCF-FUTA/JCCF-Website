@@ -59,6 +59,7 @@ const programme = defineType({
     defineField({ name: 'theme', type: 'string' }),
     defineField({ name: 'start', title: 'Starts', type: 'datetime', options: { timeStep: 15 }, validation: (r) => r.required() }),
     defineField({ name: 'end', title: 'Ends', type: 'datetime', options: { timeStep: 15 }, validation: (r) => r.min(r.valueOfField('start')).error('The end must be after the start.') }),
+    defineField({ name: 'allDay', title: 'Time not announced yet', type: 'boolean', initialValue: false, description: 'Tick when only the date is known. The site then shows dates without a time.' }),
     defineField({ name: 'venue', type: 'string' }),
     defineField({ name: 'mapUrl', title: 'Map link', type: 'url' }),
     defineField({ name: 'summary', type: 'text', rows: 3, description: 'One or two sentences for cards and link previews.', validation: (r) => r.max(240) }),

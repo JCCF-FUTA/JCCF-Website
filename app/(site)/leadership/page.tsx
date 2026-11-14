@@ -74,7 +74,7 @@ export default async function LeadershipPage() {
               {advisers.map((a) => (
                 <li key={a.name} className="flex items-center gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-5">
                   <span className="inline-flex size-14 shrink-0 items-center justify-center rounded-full bg-primary-container font-display text-title-lg text-on-primary-container">
-                    {a.name.replace(/^(Prof\.|Dr\.|Venerable|Ven\.|Rev\.)\s*/i, '').slice(0, 1)}
+                    {a.name.replace(/^(Prof\.|Dr\.?|\(Mrs\)|Venerable|Ven\.|Rev\.|\s)+/gi, '').slice(0, 1)}
                   </span>
                   <div>
                     <p className="text-title-md font-semibold">{a.name}</p>

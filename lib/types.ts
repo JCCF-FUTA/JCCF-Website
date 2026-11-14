@@ -45,6 +45,8 @@ export type Programme = {
   theme?: string;
   start: string; // ISO with offset, Africa/Lagos
   end?: string;
+  /** Date known, time not announced: show dates only (start 00:00, end 23:59 of the last day) */
+  allDay?: boolean;
   venue?: string;
   mapUrl?: string;
   summary?: string;
