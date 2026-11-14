@@ -36,9 +36,9 @@ export default async function MediaPage() {
       ) : (
         <PageHero
           crumb="Media"
-          title="Watch *& listen*"
+          title="Sermons and live services"
           image={videos[0] ? { url: videos[0].thumbnail, alt: '' } : { ...PHOTOS.stage, alt: '' }}
-          intro="Sermons, teaching weeks and prayer meetings from the Household. Videos load only when you tap play, to save your data."
+          intro="Services, teaching weeks and prayer meetings from the Household. A video loads only when you tap play, to save your data."
           actions={<LinkButton href={youtubeUrls.subscribe} tone="stage" variant="outlined"><span className="inline-flex items-center gap-2"><Brand name="youtube" /> Subscribe on YouTube</span></LinkButton>}
         />
       )}

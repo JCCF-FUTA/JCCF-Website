@@ -39,8 +39,8 @@ export default async function ProgrammesPage() {
     <>
       <PageHero
         crumb="Programmes"
-        title="Household *programmes*"
-        intro="When the Household gathers, every fellowship suspends its meetings and we meet as one. Here is what’s coming — add it to your calendar and share it."
+        title="Household programmes"
+        intro="When the Household gathers, every fellowship suspends its own meeting and we meet together. Add a programme to your calendar or share it on WhatsApp."
       />
       {featured && (
         <section aria-label="Featured programme" className="theme-stage pb-16 expanded:pb-24">

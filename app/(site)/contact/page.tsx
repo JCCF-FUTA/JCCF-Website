@@ -25,7 +25,7 @@ export default async function ContactPage() {
 
   return (
     <>
-      <PageHero crumb="Contact" compact title="Get in *touch*" intro="Questions about a fellowship, a programme or giving? Write to the Secretariat." />
+      <PageHero crumb="Contact" compact title="Contact the Secretariat" intro="Questions about a fellowship, a programme or giving? Write to the Secretariat." />
       <section className="section">
         <div className="container-page grid gap-10 expanded:grid-cols-12">
           <div className="expanded:col-span-7" data-reveal="up">
@@ -42,12 +42,12 @@ export default async function ContactPage() {
                     <div>
                       <p className="text-label-md font-semibold uppercase text-on-surface-variant">{r.label}</p>
                       {r.href && !r.cta ? (
-                        <a href={r.href} className="inline-flex min-h-11 items-center text-body-lg text-primary underline-offset-4 hover:underline">{r.value}</a>
+                        <a href={r.href} className="inline-flex min-h-12 items-center text-body-lg text-primary underline-offset-4 hover:underline">{r.value}</a>
                       ) : (
                         <p className="text-body-lg">{r.value}</p>
                       )}
                       {r.cta && r.href && (
-                        <a href={r.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-label-lg font-semibold text-primary">
+                        <a href={r.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-1 text-label-lg font-semibold text-primary">
                           {r.cta} <Icon name="north_east" size={16} />
                         </a>
                       )}
@@ -66,8 +66,8 @@ export default async function ContactPage() {
                   </div>
                 </div>
               )}
-              <p className="rounded-md bg-surface-container p-4 text-body-md text-on-surface-variant">
-                Fellowship presidents: send profile corrections here with the subject “Fellowship profile update”.
+              <p className="text-body-lg text-on-surface-variant">
+                Fellowship presidents: send profile corrections with the subject “Fellowship profile update”.
               </p>
             </div>
           </aside>

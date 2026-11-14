@@ -210,7 +210,6 @@ function NavDrawer({
                     className="group flex min-h-16 items-baseline gap-4 py-3"
                     style={{ animation: `rise-in 400ms cubic-bezier(.05,.7,.1,1) ${80 + i * 40}ms both` }}
                   >
-                    <span className="w-7 text-label-md font-semibold tabular-nums text-on-stage-variant">{String(i + 1).padStart(2, '0')}</span>
                     <span className={cn('font-display text-[2.25rem] leading-tight uppercase transition-colors group-hover:text-stage-accent', active && 'text-stage-accent')}>
                       {item.label}
                     </span>

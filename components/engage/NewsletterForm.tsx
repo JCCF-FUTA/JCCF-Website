@@ -45,7 +45,9 @@ export function NewsletterForm({ source, compact, tone = 'light' }: { source: st
           aria-invalid={state === 'error' || undefined}
           aria-describedby={error ? `nl-${source}-err` : undefined}
           className={cn(
-            'h-14 min-w-0 flex-1 rounded-full border px-5 text-body-lg outline-none transition-colors focus:border-2',
+            'h-14 min-w-0 rounded-full border px-5 text-body-lg outline-none transition-colors focus:border-2',
+            // stacked on phones: keep the field's height; side by side: share the row
+            compact ? 'flex-1' : 'shrink-0 medium:flex-1 medium:shrink',
             tone === 'stage'
               ? 'border-stage-outline bg-white/5 text-on-stage placeholder:text-on-stage-variant focus:border-glow'
               : 'border-outline bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant focus:border-primary',

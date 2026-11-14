@@ -17,6 +17,9 @@
   summary { cursor: pointer; }
   summary::-webkit-details-marker { display: none; }
   .type-hero { line-height: 0.92; letter-spacing: 0; }
+  /* No lone word on a heading's last line; fewer orphans in paragraphs (ANTI-SLOP.md) */
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p, li, dd, blockquote { text-wrap: pretty; }
   .type-display { line-height: 1.05; }
 }
 
@@ -46,17 +49,12 @@
 
   /* Overlays (DESIGN §2.3) */
   .overlay-stage { background: linear-gradient(180deg, rgb(10 10 10 / 0.35) 0%, rgb(10 10 10 / 0.75) 60%, #0a0a0a 100%); }
-  .overlay-card { background: linear-gradient(180deg, rgb(10 10 10 / 0) 35%, rgb(10 10 10 / 0.88) 100%); }
+  .overlay-card { background: linear-gradient(180deg, rgb(10 10 10 / 0) 25%, rgb(10 10 10 / 0.6) 55%, rgb(10 10 10 / 0.92) 100%); }
   .duotone-red img { filter: grayscale(1) contrast(1.1); }
   .duotone-red::after { content: ""; position: absolute; inset: 0; background: #bc0001; mix-blend-mode: multiply; opacity: 0.85; pointer-events: none; }
 
   /* Branded fallback tile used when an image slot has no photo yet (DESIGN §10) */
-  .tile-brand {
-    background:
-      radial-gradient(120% 80% at 100% 0%, rgb(250 4 4 / 0.35), transparent 55%),
-      radial-gradient(90% 70% at 0% 100%, rgb(250 221 38 / 0.10), transparent 60%),
-      linear-gradient(160deg, var(--jccf-stage-container-high), var(--jccf-stage));
-  }
+  .tile-brand { background: var(--jccf-stage-container); }
 
   /* Horizontal scroll-snap carousels (DESIGN §C21) */
   .snap-row { display: grid; grid-auto-flow: column; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
@@ -86,33 +84,28 @@
 
 @keyframes shimmer { to { background-position: -200% 0; } }
 @keyframes spin { to { transform: rotate(360deg); } }
-@keyframes rise-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes rise-in { from { transform: translateY(12px); } to { transform: none; } }
 @keyframes slide-down { from { transform: translateY(-100%); } to { transform: none; } }
 
 /* Page transition (M16) — CSS only, cheap */
-.page-enter { animation: rise-in var(--md-dur-medium2) var(--ease-emphasized-decelerate) both; }
+.page-enter { animation: settle-up-sm var(--md-dur-medium2) var(--ease-emphasized-decelerate) both; }
+@keyframes settle-up-sm { from { transform: translateY(12px); } to { transform: none; } }
 
-/* ---------- Motion start states: only when the motion script is active (DESIGN §8.4) ---------- */
-.js-motion [data-reveal="up"],
-.js-motion [data-reveal-stagger] > * { opacity: 0; }
+/* ---------- Motion (DESIGN §8 + ANTI-SLOP.md) ----------
+   Nothing starts hidden. Every animation begins from a visible state and only moves (transform),
+   so content is readable without JavaScript, with motion off, and on the very first paint (LCP).
+   Gated by html.js-motion, which is never set with prefers-reduced-motion. */
 
-/* M1 hero intro — pure CSS so above-the-fold content paints immediately (LCP), no JS needed.
-   Items rise in order using --d (0, 1, 2 …). */
+/* M1 hero intro — pure CSS, runs at first paint. Items settle in order using --d (0, 1, 2 …). */
 .js-motion [data-hero-item] {
-  animation: rise-in-hero 800ms cubic-bezier(.05,.7,.1,1) both;
-  animation-delay: calc(120ms + var(--d, 0) * 110ms);
+  animation: settle-up 700ms cubic-bezier(.05,.7,.1,1) both;
+  animation-delay: calc(80ms + var(--d, 0) * 90ms);
 }
 .js-motion [data-hero-bg] { animation: hero-bg 1.6s cubic-bezier(.2,0,0,1) both; }
-.js-motion [data-hero-item] [data-hl-bar] { animation: bar-sweep 600ms cubic-bezier(.2,0,0,1) both; animation-delay: calc(700ms + var(--d, 0) * 110ms); }
-@keyframes rise-in-hero { from { opacity: 0.01; transform: translateY(28px); } to { opacity: 1; transform: none; } }
-/* Hero headlines (the LCP element) move but never fade, so they count as painted on first frame. */
-.js-motion h1[data-hero-item] { animation-name: rise-in-title; }
-@keyframes rise-in-title { from { transform: translateY(32px); } to { transform: none; } }
-@keyframes hero-bg { from { transform: scale(1.12); } to { transform: none; } }
+.js-motion [data-hero-item] [data-hl-bar] { animation: bar-sweep 600ms cubic-bezier(.2,0,0,1) both; animation-delay: calc(500ms + var(--d, 0) * 90ms); }
+@keyframes settle-up { from { transform: translateY(24px); } to { transform: none; } }
+@keyframes hero-bg { from { transform: scale(1.08); } to { transform: none; } }
 @keyframes bar-sweep { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-.js-motion [data-reveal="image"] { clip-path: inset(100% 0 0 0); }
-.js-motion [data-split] { visibility: hidden; }
-.js-motion [data-split] [data-hl-bar] { transform: scaleX(0); }
 
 /* Grayscale portraits → colour (DESIGN §10) */
 .portrait img { filter: grayscale(1); transition: filter var(--md-dur-xlong1) var(--ease-standard); }
@@ -126,5 +119,4 @@
 /* Countdown digit flip (C06) */
 @keyframes digit-in { from { transform: translateY(100%); } to { transform: none; } }
 @keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
-.is-pinned [data-carousel-arrows] { display: none; }
 .is-pinned [data-pin-track] { scroll-snap-type: none; }

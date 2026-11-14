@@ -3,7 +3,8 @@
 The public website of the **Joint Christian Campus Fellowship (JCCF), Federal University of Technology, Akure** — jccffuta.org.
 
 - Product requirements: `JCCF FUTA Website — Product Requirements Document.md`
-- Design system and build spec: `DESIGN.md` (tokens in `jccf-theme.css`)
+- Design system and build spec: `DESIGN.md` (tokens in `jccf-theme.css`). §17 records the anti-slop audit and overrides earlier sections.
+- Design rules for any UI change: `ANTI-SLOP.md`
 - Content sources: `Reviewed JCCF Constitution (2024).pdf`, the official logo, the @jccf_futa YouTube channel
 
 Stack: Next.js 16 (App Router, TypeScript) · Tailwind CSS v4 · Sanity (content, Studio at `/studio`) · Supabase (forms, payments log, staff login) · Paystack · YouTube · Cloudflare Turnstile · GSAP + Lenis. Hosted on Vercel.
@@ -75,7 +76,7 @@ Import the repo, add the env vars, set `NEXT_PUBLIC_SITE_URL=https://jccffuta.or
 
 ## Content checklist before launch
 
-Seed content marked **PLACEHOLDER** in `lib/content/seed.ts` is *not confirmed*. Replace it in the Studio:
+Seed content marked **PLACEHOLDER** (`placeholder: true`) in `lib/content/seed.ts` is *not confirmed*. It appears only in development, labelled **Sample**. Production builds hide it (unconfirmed programmes, executive names and posts disappear; fellowship schedules are not shown). To review layouts with sample content on a preview deployment, set `NEXT_PUBLIC_SHOW_SAMPLE_CONTENT=true`. Replace it in the Studio:
 
 - [ ] Programme names and dates (Week of Prayers 2027, Combined Sunday Service, Change of Pulpit, Teaching Week 2027) and which one is **featured** for the countdown
 - [ ] Every fellowship’s meeting days, time, venue, president and contacts (send the Excel template to presidents through JCCFCOP). Cards show “Schedule to be confirmed” until then.

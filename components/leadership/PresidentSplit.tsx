@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { Leader } from '@/lib/types';
 import { LinkButton } from '@/components/ui/Button';
-import { Eyebrow } from '@/components/ui/Eyebrow';
+import { StatusChip } from '@/components/ui/Chip';
 import { Icon } from '@/components/ui/Icon';
 
 /** President split on stage (DESIGN §C15). */
@@ -19,7 +19,10 @@ export function PresidentSplit({ president, showLink = true, heading: H = 'h2' }
         )}
       </div>
       <div className="flex flex-col items-start gap-5 expanded:col-span-7">
-        <Eyebrow tone="stage">Household President</Eyebrow>
+        <div className="flex items-center gap-2">
+          <p className="text-label-md font-semibold uppercase text-stage-accent-text">Household President</p>
+          {president.placeholder && <StatusChip kind="stage-dashed">Sample</StatusChip>}
+        </div>
         <H className={`font-display text-display-sm uppercase ${president.placeholder ? 'opacity-70' : ''}`}>{president.name}</H>
         <p className="text-body-lg text-on-stage-variant">
           {[president.office, president.department, president.level].filter(Boolean).join(' · ')}

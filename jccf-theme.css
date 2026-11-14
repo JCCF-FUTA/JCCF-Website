@@ -179,13 +179,13 @@
   --text-title-sm--letter-spacing: 0.00714em;
   --text-body-lg: 1rem;                        /* 16/24 */
   --text-body-lg--line-height: 1.5rem;
-  --text-body-lg--letter-spacing: 0.03125em;
+  --text-body-lg--letter-spacing: 0;           /* anti-slop: no extra tracking on body text */
   --text-body-md: 0.875rem;                    /* 14/20 */
   --text-body-md--line-height: 1.25rem;
-  --text-body-md--letter-spacing: 0.0179em;
+  --text-body-md--letter-spacing: 0;
   --text-body-sm: 0.75rem;                     /* 12/16 */
   --text-body-sm--line-height: 1rem;
-  --text-body-sm--letter-spacing: 0.0333em;
+  --text-body-sm--letter-spacing: 0.01em;
   --text-label-lg: 0.875rem;                   /* 14/20, 600 */
   --text-label-lg--line-height: 1.25rem;
   --text-label-lg--letter-spacing: 0.00714em;

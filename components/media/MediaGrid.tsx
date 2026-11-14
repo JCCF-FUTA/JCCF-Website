@@ -40,7 +40,7 @@ export function MediaGrid({ videos }: { videos: Video[] }) {
       </ul>
       {shown < list.length && (
         <div className="mt-10 flex justify-center">
-          <Button variant="outlined" icon="add" onClick={() => setShown((n) => n + PAGE)}>Load more</Button>
+          <Button variant="outlined" icon="add" onClick={() => setShown((n) => n + PAGE)}>Show more sermons</Button>
         </div>
       )}
     </div>

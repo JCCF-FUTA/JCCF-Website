@@ -38,7 +38,13 @@ export function FellowshipExplorer({ fellowships, venues }: { fellowships: Fello
   return (
     <>
       <div className="sticky top-20 z-30 -mt-10 mb-8 expanded:top-[5.25rem]">
-        <FinderBar venues={venues} values={v} onChange={setV} />
+        <FinderBar
+          venues={venues}
+          days={[...new Set(fellowships.flatMap((f) => f.meetingDays))]}
+          showType={new Set(fellowships.map((f) => f.type)).size > 1}
+          values={v}
+          onChange={setV}
+        />
       </div>
 
       <div id="results" className="scroll-mt-32">
@@ -57,6 +63,11 @@ export function FellowshipExplorer({ fellowships, venues }: { fellowships: Fello
           )}
         </div>
 
+        {!fellowships.some((f) => f.meetingDays.length || f.venue) && (
+          <p className="mb-6 max-w-prose text-body-lg text-on-surface-variant">
+            Meeting days, times and venues will appear here as each fellowship confirms them. Until then, open a fellowship’s profile to contact it.
+          </p>
+        )}
         {results.length ? (
           <ul className="grid gap-4 medium:grid-cols-2 medium:gap-6 expanded:grid-cols-3">
             {results.map((f) => <li key={f.slug}><FellowshipListingCard f={f} /></li>)}
@@ -65,7 +76,7 @@ export function FellowshipExplorer({ fellowships, venues }: { fellowships: Fello
           <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-outline-variant px-6 py-16 text-center">
             <Icon name="search" size={40} className="text-on-surface-variant" />
             <p className="text-title-md font-semibold">No fellowship matches those filters.</p>
-            <p className="text-body-md text-on-surface-variant">Try another day or venue, or clear the filters to see everyone.</p>
+            <p className="text-body-lg text-on-surface-variant">Try another day or venue, or clear the filters to see everyone.</p>
             <Button variant="tonal" onClick={() => setV(EMPTY_FINDER)} className="mt-2">Clear filters</Button>
           </div>
         )}

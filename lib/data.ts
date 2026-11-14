@@ -4,7 +4,7 @@ import { sanityFetch } from './sanity/client';
 import * as Q from './sanity/queries';
 import * as seed from './content/seed';
 import { isPast } from './format';
-import { integrations } from './site';
+import { integrations, SHOW_SAMPLES } from './site';
 import type {
   Fellowship, GalleryAlbum, GiveSettings, Leader, Post, Programme, SiteSettings, Unit,
 } from './types';
@@ -18,6 +18,15 @@ async function fromCms<T>(query: string, fallback: T, params?: Record<string, st
   const data = await sanityFetch<T>(query, params);
   if (data == null || (Array.isArray(data) && data.length === 0)) return fallback;
   return data;
+}
+
+/** Drop unconfirmed sample items in production (ANTI-SLOP: never ship invented content). */
+const real = <T extends { placeholder?: boolean }>(items: T[]) => (SHOW_SAMPLES ? items : items.filter((i) => !i.placeholder));
+
+/** A fellowship's name is real (constitution); an unconfirmed schedule is not shown in production. */
+function fellowshipForDisplay(f: Fellowship): Fellowship {
+  if (SHOW_SAMPLES || !f.placeholder) return f;
+  return { ...f, meetingDays: [], meetingTime: undefined, venue: undefined };
 }
 
 const clean = <T extends object>(o: T): T =>
@@ -45,25 +54,26 @@ export const getGiveSettings = cache(async (): Promise<GiveSettings> => {
 });
 
 export const getFellowships = cache(async (): Promise<Fellowship[]> =>
-  (await fromCms(Q.FELLOWSHIPS_QUERY, seed.FELLOWSHIPS)).filter((f) => f.status !== 'inactive'));
+  (await fromCms(Q.FELLOWSHIPS_QUERY, seed.FELLOWSHIPS)).filter((f) => f.status !== 'inactive').map(fellowshipForDisplay));
 
 export const getFellowship = cache(async (slug: string): Promise<Fellowship | null> => {
   if (integrations.sanity) {
     const f = await sanityFetch<Fellowship>(Q.FELLOWSHIP_QUERY, { slug });
     if (f) return f;
   }
-  return seed.FELLOWSHIPS.find((f) => f.slug === slug) ?? null;
+  const f = seed.FELLOWSHIPS.find((x) => x.slug === slug);
+  return f ? fellowshipForDisplay(f) : null;
 });
 
 export const getProgrammes = cache(async (): Promise<Programme[]> =>
-  [...(await fromCms(Q.PROGRAMMES_QUERY, seed.PROGRAMMES))].sort((a, b) => a.start.localeCompare(b.start)));
+  real([...(await fromCms(Q.PROGRAMMES_QUERY, seed.PROGRAMMES))]).sort((a, b) => a.start.localeCompare(b.start)));
 
 export const getProgramme = cache(async (slug: string): Promise<Programme | null> => {
   if (integrations.sanity) {
     const p = await sanityFetch<Programme>(Q.PROGRAMME_QUERY, { slug });
     if (p) return p;
   }
-  return seed.PROGRAMMES.find((p) => p.slug === slug) ?? null;
+  return real(seed.PROGRAMMES).find((p) => p.slug === slug) ?? null;
 });
 
 export async function getUpcomingProgrammes(now = Date.now()) {
@@ -88,16 +98,16 @@ export async function getFeaturedProgramme(now = Date.now()): Promise<Programme 
   );
 }
 
-export const getLeaders = cache(async (): Promise<Leader[]> => fromCms(Q.LEADERS_QUERY, seed.LEADERS));
+export const getLeaders = cache(async (): Promise<Leader[]> => real(await fromCms(Q.LEADERS_QUERY, seed.LEADERS)));
 
-export const getPosts = cache(async (): Promise<Post[]> => fromCms(Q.POSTS_QUERY, seed.POSTS));
+export const getPosts = cache(async (): Promise<Post[]> => real(await fromCms(Q.POSTS_QUERY, seed.POSTS)));
 
 export const getPost = cache(async (slug: string): Promise<Post | null> => {
   if (integrations.sanity) {
     const p = await sanityFetch<Post>(Q.POST_QUERY, { slug });
     if (p) return p;
   }
-  return seed.POSTS.find((p) => p.slug === slug) ?? null;
+  return real(seed.POSTS).find((p) => p.slug === slug) ?? null;
 });
 
 export const getUnits = cache(async (): Promise<Unit[]> => fromCms(Q.UNITS_QUERY, seed.UNITS));

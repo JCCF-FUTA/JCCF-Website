@@ -78,7 +78,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
             </nav>
             <div className="flex flex-wrap gap-2" data-hero-item>
               <StatusChip kind="stage">{past ? 'Past programme' : 'Upcoming'}</StatusChip>
-              {p.placeholder && <StatusChip kind="stage-dashed">Date to be confirmed</StatusChip>}
+              {p.placeholder && <StatusChip kind="stage-dashed">Sample</StatusChip>}
             </div>
             <h1 className="type-display text-display-lg text-balance" data-hero-item style={{ '--d': 1 } as React.CSSProperties}>{p.title}</h1>
             {p.theme && <p data-hero-item className="text-title-lg text-glow">“{p.theme}”</p>}

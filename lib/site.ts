@@ -10,12 +10,20 @@ export const SITE = {
   mottoRef: 'Ephesians 4:13',
   founded: '1996/97',
   description:
-    'The Joint Christian Campus Fellowship (JCCF), FUTA — one Household of the Protestant fellowships and Christian groups at the Federal University of Technology, Akure, since 1996/97.',
+    'The Joint Christian Campus Fellowship (JCCF), FUTA brings together the Protestant fellowships and Christian groups at the Federal University of Technology, Akure as one Household. Find a fellowship, see programmes and watch sermons.',
   url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://jccffuta.org').replace(/\/$/, ''),
   youtubeChannelId: process.env.YOUTUBE_CHANNEL_ID || 'UCKBys_fv2AYhOVQ81RP0qug',
   youtubeHandle: '@jccf_futa',
   timeZone: 'Africa/Lagos',
 } as const;
+
+/**
+ * Sample content (unconfirmed placeholders in lib/content/seed.ts) is shown only in development,
+ * clearly marked "Sample". Production builds hide it, so nothing invented ever ships (ANTI-SLOP.md).
+ * Set NEXT_PUBLIC_SHOW_SAMPLE_CONTENT=true on a preview deployment to review layouts with it.
+ */
+export const SHOW_SAMPLES =
+  process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_SHOW_SAMPLE_CONTENT === 'true';
 
 export const integrations = {
   sanity: Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID),

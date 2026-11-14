@@ -31,7 +31,7 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
             We couldn’t confirm this payment yet. If you were charged, keep your Paystack reference{reference ? <> (<span className="font-mono text-on-stage">{reference}</span>)</> : null} and contact us — we’ll sort it out.
           </p>
         )}
-        <p className="max-w-[48ch] text-body-md italic text-on-stage-variant">“God loveth a cheerful giver.” — 2 Corinthians 9:7</p>
+        <p className="max-w-[48ch] text-body-lg italic text-on-stage-variant">“God loveth a cheerful giver” (2 Corinthians 9:7).</p>
         <div className="flex flex-wrap justify-center gap-3">
           <LinkButton href="/" tone="stage" variant="filled-inverse">Back to home</LinkButton>
           {!ok && <LinkButton href="/contact" tone="stage" variant="outlined">Contact us</LinkButton>}

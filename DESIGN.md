@@ -534,3 +534,30 @@ Plain, functional M3 list layouts on `surface`: prayer requests list with "Praye
 7. Run the §13 and §14 checks on a real mid-range Android phone before launch.
 
 Open items to confirm with the JCCF team: logo file (red and yellow hex values), real stat numbers, featured programme name and date, Secretariat address and phone, WhatsApp channel link.
+
+---
+
+## 17. Anti-slop overrides (Nov 2026 audit)
+
+`ANTI-SLOP.md` is part of the design system. **Where this section conflicts with anything above, this section wins.**
+
+| Area | Rule now | Replaces |
+| --- | --- | --- |
+| Purpose | Home exists to help a student **find a fellowship**; then next programme / watch live; then give. The finder bar is the hero's one primary action. | C05 CTA pair |
+| Eyebrows (C03) | Only when they add information the heading doesn't (e.g. "Ephesians 4:13", "We are live"). No "Our vision", "Welcome home", "Find your family". | C03 examples |
+| Red emphasis | One red word only in the **Home hero** and the **Give** card. All other titles are one colour; hierarchy comes from size and weight. | §3 "one highlighted word per title" |
+| Stats (C08) | Three real numbers, each with a plain label and source: 30 years since 1996/97 · 25 fellowships (2024 constitution) · 5 units. No count-up. | C08 four tiles, M4 |
+| Start here (Home §5) | One large "Find a fellowship" card + two smaller cards (sermons, give). Never three equal boxes. | "Welcome to the Household" 3 equal cards |
+| Mission (C10) | Numbers 01–07 kept (the constitution lists i–vii). No icon circles. Pinned track (M6) only when it costs ≤ 1.5 screens of scroll; arrows and keyboard still move it. | C10 icon circles, M6 |
+| Fellowship marquee (C22) | Replaced by a static, wrapped list of every fellowship's short name, each a link. | C22, M8 |
+| Photo band (C16) | Dark overlay only. Red stays under ~10% of a screen except the Give band. | C16 red duotone |
+| Give band (C17) | Solid red, white text (no translucent text), no line illustration. | C17 dove/hand SVG |
+| Glass | Only the hero "Next programme" card (it sits over a photo). One glass element per screen. | Glass icon circles |
+| Live pulse (M12) | Pulses only while actually streaming. "Happening now" (not streamed) does not pulse. | M12 |
+| Motion | Nothing starts hidden. Hero intro (M1) is CSS, transform-only. Reveals (M2/M15) only move elements that start below the fold. M5 is a scale settle inside a visible frame. **Removed:** M3 word-split titles, M4 count-up, M17 magnetic buttons. | §8 catalogue |
+| Placeholder images | No fake flyer/photo tiles. Programme cards without a flyer are compact cards led by the date; fellowship listings without a photo have no image area. | C11/C12 fallbacks |
+| Body type | Body letter-spacing 0. Descriptive paragraphs ≥ 16px; 14px only for meta (dates, venues, times); 12px only for labels. Headings `text-wrap: balance`, paragraphs `pretty`. | §3 body tracking |
+| Sample content | Unconfirmed seed content renders only in development (`SHOW_SAMPLES`), marked "Sample". Production never shows invented names, dates, quotes or schedules. | — |
+| Copy | No slogans, no em-dash asides, no "Welcome to…". Buttons say exactly what happens ("Search fellowships", "Programme details", "Show more sermons"). Scripture is cited in brackets. | — |
+| Touch targets | 48px minimum everywhere, including footer links and the live banner (now 48px tall). | C02 44px |
+| Logo swatches | On About → "What our logo means" only, small 40px swatches use the logo's own colours: green `#06903F`, red `#FA0404`, yellow `#FADD26`, Bible-page cream `#F3EAD2`, white. Not for UI elsewhere. | — |

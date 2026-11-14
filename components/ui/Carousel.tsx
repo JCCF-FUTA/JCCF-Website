@@ -38,10 +38,17 @@ export function Carousel({
   useEffect(() => {
     update();
     const el = ref.current;
+    // When the motion layer pins this track (M6), progress comes from the page scroll instead.
+    const onPin = (e: Event) => {
+      const p = (e as CustomEvent<number>).detail;
+      setState({ start: p <= 0.01, end: p >= 0.99, progress: p });
+    };
     el?.addEventListener('scroll', update, { passive: true });
+    el?.addEventListener('jccf:pin-progress', onPin);
     window.addEventListener('resize', update);
     return () => {
       el?.removeEventListener('scroll', update);
+      el?.removeEventListener('jccf:pin-progress', onPin);
       window.removeEventListener('resize', update);
     };
   }, [update]);
@@ -52,6 +59,10 @@ export function Carousel({
     const card = el.firstElementChild as HTMLElement | null;
     const gap = parseFloat(getComputedStyle(el).columnGap || '16') || 16;
     const step = card ? card.offsetWidth + gap : el.clientWidth * 0.8;
+    if (el.closest('.is-pinned')) {
+      el.dispatchEvent(new CustomEvent('jccf:pin-step', { detail: dir * step }));
+      return;
+    }
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     el.scrollBy({ left: dir * step, behavior: reduce ? 'auto' : 'smooth' });
   };
@@ -68,14 +79,18 @@ export function Carousel({
           if (e.key === 'ArrowRight') { e.preventDefault(); by(1); }
           if (e.key === 'ArrowLeft') { e.preventDefault(); by(-1); }
         }}
-        className={cn('snap-row gap-4 medium:gap-6 rounded-xl', trackClassName)}
+        className={cn(
+          'snap-row gap-4 medium:gap-6',
+          // Bleed to the screen edge on phones/tablets so cards aren't cut at the page padding.
+          '-mx-4 px-4 scroll-pl-4 medium:-mx-6 medium:px-6 medium:scroll-pl-6 expanded:mx-0 expanded:px-0 expanded:scroll-pl-0',
+          trackClassName,
+        )}
       >
         {children}
       </ul>
       <div className={cn('mt-6 flex items-center gap-4', controlsClassName)}>
         <div className={cn('h-0.5 flex-1 overflow-hidden rounded-full', tone === 'stage' ? 'bg-white/15' : 'bg-outline-variant')} aria-hidden="true">
           <div
-            data-pin-progress={pinTrack ? '' : undefined}
             className={cn('h-full origin-left rounded-full transition-transform duration-200', tone === 'stage' ? 'bg-stage-accent' : 'bg-primary')}
             style={{ transform: `scaleX(${Math.max(0.08, state.progress)})` }}
           />

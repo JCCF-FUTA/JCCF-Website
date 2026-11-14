@@ -13,7 +13,7 @@ import { Turnstile } from '@/components/forms/Turnstile';
 const MIN = 100;
 
 /** Give card with Paystack checkout (DESIGN §C17, PRD F5). */
-export function GiveForm({ give, enabled, className, headingLevel = 'h2' }: { give: GiveSettings; enabled: boolean; className?: string; headingLevel?: 'h2' | 'h3' }) {
+export function GiveForm({ give, enabled, className, headingLevel = 'h2', title = 'Give to *the Household*' }: { give: GiveSettings; enabled: boolean; className?: string; headingLevel?: 'h2' | 'h3'; title?: string }) {
   const open = give.categories.filter((c) => c.open);
   const kinds = [
     { kind: 'offering', label: 'Offering' },
@@ -42,7 +42,7 @@ export function GiveForm({ give, enabled, className, headingLevel = 'h2' }: { gi
     e.preventDefault();
     const errs: Record<string, string> = {};
     if (!name.trim()) errs.name = 'Enter your name.';
-    if (!/^\S+@\S+\.\S+$/.test(email)) errs.email = 'Enter a valid email address — Paystack sends your receipt there.';
+    if (!/^\S+@\S+\.\S+$/.test(email)) errs.email = 'Enter a valid email address. Paystack sends your receipt there.';
     if (amount < MIN) errs.amount = `The minimum gift is ${naira(MIN)}.`;
     setFields(errs);
     if (Object.keys(errs).length) return;
@@ -67,8 +67,8 @@ export function GiveForm({ give, enabled, className, headingLevel = 'h2' }: { gi
   return (
     <form onSubmit={onSubmit} noValidate className={cn('theme-light flex flex-col gap-6 rounded-2xl p-6 shadow-elev-4 expanded:p-10', className)}>
       <div>
-        <Title as={headingLevel} text="Give to *the Household*" size="headline-lg" split={false} />
-        <p className="mt-2 text-body-md text-on-surface-variant">Your giving funds combined programmes, welfare and outreach on campus.</p>
+        <Title as={headingLevel} text={title} size="headline-lg" />
+        <p className="mt-2 text-body-lg text-on-surface-variant">Your giving funds combined programmes, welfare and outreach on campus.</p>
       </div>
 
       {!enabled && (

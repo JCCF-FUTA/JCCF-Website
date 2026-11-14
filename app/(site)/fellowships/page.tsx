@@ -22,7 +22,7 @@ export default async function FellowshipsPage() {
         crumb="Fellowships"
         compact
         image={{ ...PHOTOS.hall, alt: '' }}
-        title="Find your *family*"
+        title="Find a fellowship"
         intro={`${fellowships.length} fellowships and Christian groups, one Household. Filter by meeting day or venue and visit one this week.`}
       />
       <section aria-label="Fellowships" className="relative pb-24">
@@ -36,7 +36,7 @@ export default async function FellowshipsPage() {
           >
             <FellowshipExplorer fellowships={fellowships} venues={venues} />
           </Suspense>
-          <p className="mt-12 text-body-md text-on-surface-variant">
+          <p className="mt-12 max-w-prose text-body-lg text-on-surface-variant">
             Is your fellowship’s information wrong or missing? Ask your president to send the update to the Publicity Unit through the{' '}
             <a className="font-semibold text-primary underline-offset-4 hover:underline" href="/contact">contact page</a>.
           </p>

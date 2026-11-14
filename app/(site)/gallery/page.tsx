@@ -12,7 +12,7 @@ export default async function GalleryPage() {
   const albums = await getGallery();
   return (
     <>
-      <PageHero crumb="Gallery" compact title="Moments *together*" intro="Photos from Household programmes. Tap a photo to view it full screen." />
+      <PageHero crumb="Gallery" compact title="Gallery" intro="Photos from Household programmes. Tap a photo to view it full screen." />
       {albums.map((a) => (
         <section key={a.slug} id={a.slug} aria-labelledby={`${a.slug}-title`} className="section scroll-mt-20 border-b border-outline-variant last:border-0">
           <div className="container-page">

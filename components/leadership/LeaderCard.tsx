@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Leader } from '@/lib/types';
 import { cn } from '@/lib/cn';
 import { Icon } from '@/components/ui/Icon';
+import { StatusChip } from '@/components/ui/Chip';
 
 /** Leader card (DESIGN §C15): B&W portrait → colour on hover / in view. */
 export function LeaderCard({ l, tone = 'light' }: { l: Leader; tone?: 'light' | 'stage' }) {
@@ -19,7 +20,8 @@ export function LeaderCard({ l, tone = 'light' }: { l: Leader; tone?: 'light' | 
       </div>
       <div>
         <p className={cn('text-label-md font-semibold uppercase', stage ? 'text-stage-accent-text' : 'text-primary')}>{l.office}</p>
-        <h3 className={cn('mt-1 text-title-md font-semibold', l.placeholder && 'italic opacity-70')}>{l.name}</h3>
+        <h3 className={cn('mt-1 text-title-md font-semibold', l.placeholder && 'text-on-surface-variant')}>{l.name}</h3>
+        {l.placeholder && <StatusChip kind={stage ? 'stage-dashed' : 'placeholder'} className="mt-2">Sample</StatusChip>}
         {(l.department || l.level) && (
           <p className={cn('text-body-sm', stage ? 'text-on-stage-variant' : 'text-on-surface-variant')}>{[l.department, l.level].filter(Boolean).join(' · ')}</p>
         )}

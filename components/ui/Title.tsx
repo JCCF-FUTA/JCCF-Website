@@ -50,7 +50,6 @@ export function Title({
     <Tag
       id={id}
       className={cn(sizeCls, 'text-balance', className)}
-      data-split={split && heroItem === undefined ? '' : undefined}
       data-hero-item={heroItem !== undefined ? '' : undefined}
       style={heroItem !== undefined ? ({ '--d': heroItem } as React.CSSProperties) : undefined}
     >

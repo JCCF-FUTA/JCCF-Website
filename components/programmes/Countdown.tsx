@@ -48,7 +48,8 @@ export function Countdown({ title, href, start, end, dateLine, now: serverNow, v
 
   if (variant === 'chip') {
     if (ended) return null;
-    if (live || running) return <StatusChip kind="live">Happening now</StatusChip>;
+    if (live) return <StatusChip kind="live">Live now</StatusChip>;
+    if (running) return <StatusChip kind="soon">Happening now</StatusChip>;
     const days = Math.ceil(left / 86_400_000);
     return <StatusChip kind={soon ? 'soon' : 'image'} icon="schedule">{soon ? 'Starting soon' : days <= 1 ? 'Tomorrow' : `In ${days} days`}</StatusChip>;
   }
@@ -59,8 +60,10 @@ export function Countdown({ title, href, start, end, dateLine, now: serverNow, v
   return (
     <div className={cn('flex flex-col gap-4', className)}>
       <div className="flex flex-wrap items-center gap-2">
-        {live || running ? (
-          <StatusChip kind="live">{live ? 'Live now' : 'Happening now'}</StatusChip>
+        {live ? (
+          <StatusChip kind="live">Live now</StatusChip>
+        ) : running ? (
+          <StatusChip kind="soon">Happening now</StatusChip>
         ) : soon ? (
           <StatusChip kind="soon">Starting soon</StatusChip>
         ) : (
@@ -80,10 +83,11 @@ export function Countdown({ title, href, start, end, dateLine, now: serverNow, v
 
       {live || running ? (
         <Link
-          href="/media#live"
+          href={live ? '/media#live' : href ?? '/programmes'}
           className="inline-flex h-12 items-center gap-2 self-start rounded-full bg-white px-6 text-label-lg font-semibold text-stage"
         >
-          <span className="size-2 rounded-full bg-live animate-live-pulse" aria-hidden="true" /> Watch now
+          {live && <span className="size-2 rounded-full bg-live animate-live-pulse" aria-hidden="true" />}
+          {live ? 'Watch the live service' : 'See programme details'}
         </Link>
       ) : (
         <>

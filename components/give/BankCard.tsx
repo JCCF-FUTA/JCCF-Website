@@ -46,8 +46,8 @@ export function BankCard({ give, className }: { give: GiveSettings; className?: 
           </div>
         </dl>
       ) : (
-        <p className="rounded-md bg-surface-container p-4 text-body-md text-on-surface-variant">
-          The official JCCF account details will appear here once confirmed by the Financial Secretary/Treasurer.
+        <p className="text-body-lg text-on-surface-variant">
+          The official JCCF account details will appear here once the Financial Secretary/Treasurer confirms them.
         </p>
       )}
       <p className="text-body-sm text-on-surface-variant">Use your name and the purpose (e.g. “Offering”) as the transfer narration.</p>

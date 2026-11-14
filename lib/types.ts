@@ -82,6 +82,7 @@ export type Post = {
   author?: string;
   image?: Img;
   body?: PortableTextBlock[];
+  placeholder?: boolean;
 };
 
 export type Video = {

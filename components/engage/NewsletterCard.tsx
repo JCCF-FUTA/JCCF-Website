@@ -18,8 +18,8 @@ export function NewsletterCard({ whatsapp, source, tone = 'light', className, wi
       )}
     >
       <div className="flex flex-col gap-3">
-        <Title text="Stay in the *loop*" size="headline-lg" tone={tone} split={false} />
-        <p className="text-body-lg opacity-90">Programme dates, announcements and devotionals. No spam.</p>
+        <Title text="Get programme dates by email" size="headline-lg" tone={tone} />
+        <p className="text-body-lg">Household programme dates, announcements and devotionals. About two emails a month.</p>
       </div>
       <div className="flex flex-col gap-4">
         <NewsletterForm source={source} tone={tone} />

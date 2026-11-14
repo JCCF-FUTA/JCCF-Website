@@ -66,7 +66,7 @@ export const LOGO_MEANING: { symbol: string; meaning: string; detail: string; sw
   { symbol: 'The Dove', meaning: 'The Spirit of God', detail: 'The Holy Spirit who leads the Household.', swatch: 'dove' },
   { symbol: 'The Book', meaning: 'The Word of God', detail: 'Scripture, our final authority in faith and conduct.', swatch: 'book' },
   { symbol: 'The Olive Branch', meaning: 'Peace and covenant', detail: 'As with Noah after the flood, God keeps His family on campus through every spiritual and physical flood.', swatch: 'olive' },
-  { symbol: 'The Green Circle', meaning: 'Oneness', detail: 'The unbroken oneness of the Father, Son and Holy Spirit — and the call for the church in FUTA to be one. Green speaks of constant growth and fruitfulness.', swatch: 'green' },
+  { symbol: 'The Green Circle', meaning: 'Oneness', detail: 'The unbroken oneness of the Father, Son and Holy Spirit, and the call for the church in FUTA to be one. Green speaks of constant growth and fruitfulness.', swatch: 'green' },
   { symbol: 'The Red Circle', meaning: 'Redemption', detail: 'The unbroken outer circle is the blood of redemption.', swatch: 'red' },
   { symbol: 'The Yellow Glow', meaning: 'The glory of Christ', detail: 'His glory over all we do.', swatch: 'yellow' },
 ];
@@ -80,7 +80,7 @@ export const HISTORY: { period: string; title: string; text: string }[] = [
   {
     period: '1996/97',
     title: 'One body for every fellowship',
-    text: 'FUTA management wanted every student fellowship registered under one Christian body. Five pioneer executives — President, Vice-President, General Secretary, Treasurer and Public Relations Officer — began writing a constitution.',
+    text: 'FUTA management wanted every student fellowship registered under one Christian body. Five pioneer executives (President, Vice-President, General Secretary, Treasurer and Public Relations Officer) began writing a constitution.',
   },
   {
     period: '1997/98',
@@ -95,14 +95,14 @@ export const HISTORY: { period: string; title: string; text: string }[] = [
   {
     period: 'Today',
     title: 'One Household',
-    text: 'Our emphasis is not a collection of campus fellowships but oneness of purpose — pressing toward the measure of the stature of the fullness of Christ.',
+    text: 'The constitution puts it this way: our emphasis is oneness of purpose, pressing towards the mark of growing into the measure of the stature of the fullness of Christ.',
   },
 ];
 
 export const UNITS: Unit[] = [
   { name: 'Choir', summary: 'Leads worship at every Household programme with choirs from member fellowships.', icon: 'mic' },
   { name: 'Drama', summary: 'Ministers the gospel through drama at Household programmes and beyond.', icon: 'theater_comedy' },
-  { name: 'Publicity', summary: 'Tells the campus about Household programmes — posters, media and this website.', icon: 'campaign' },
+  { name: 'Publicity', summary: 'Tells the campus about Household programmes through posters, media and this website.', icon: 'campaign' },
   { name: 'Ushering', summary: 'Keeps order, welcomes guests and records attendance at every programme.', icon: 'handshake' },
   { name: 'Organizing', summary: 'Secures venues and sets up stage, sound and light for Household programmes.', icon: 'event_available' },
 ];
@@ -239,7 +239,7 @@ export const PROGRAMMES: Programme[] = [
     start: '2026-06-15T17:00:00+01:00',
     end: '2026-06-21T19:00:00+01:00',
     venue: 'Chapel of Faith Auditorium, FUTA',
-    summary: 'Daniel 11:32b — “the people that do know their God shall be strong, and do exploits.”',
+    summary: '“The people that do know their God shall be strong, and do exploits” (Daniel 11:32b).',
     flyer: yt('Sy1Hd53o2Ng', 'Teaching Week 2026 flyer: Knowing God, the prerequisite for doing exploit'),
     relatedVideoIds: ['CjPmVAGTxa0', 'qIZ5Ors3Op0', 'Sy1Hd53o2Ng', 'cVsHrjgXa60', 'b5RfR5jUrB0', 'yQhTAOx2qFw'],
   },
@@ -250,7 +250,7 @@ export const PROGRAMMES: Programme[] = [
     theme: 'Who can seek the Lord?',
     start: '2025-12-06T08:00:00+01:00',
     venue: 'GSF FUTA, Southgate, Akure',
-    summary: 'A retreat for workers of the Household — Psalm 24:3–6.',
+    summary: 'A retreat for workers of the Household, from Psalm 24:3–6.',
     flyer: yt('rIxw54th1m8', 'Workers’ Retreat flyer: Who can seek the Lord?'),
     relatedVideoIds: ['rIxw54th1m8'],
   },
@@ -262,8 +262,7 @@ const TBC = 'Name to be confirmed';
 
 export const LEADERS: Leader[] = [
   // PLACEHOLDER names — the current (27th) Household Executive must supply names, photos, department and level.
-  { name: TBC, office: 'Household President', group: 'executive', order: 1, placeholder: true,
-    quote: 'Our emphasis is not the gathering of many fellowships but one purpose: growing together into the fullness of Christ. You are welcome to the Household.' },
+  { name: TBC, office: 'Household President', group: 'executive', order: 1, placeholder: true },
   { name: TBC, office: 'Vice President', group: 'executive', order: 2, placeholder: true },
   { name: TBC, office: 'General Secretary', group: 'executive', order: 3, placeholder: true },
   { name: TBC, office: 'Prayer/Evangelism Coordinator', group: 'executive', order: 4, placeholder: true },
@@ -283,11 +282,12 @@ export const LEADERS: Leader[] = [
 
 export const POSTS: Post[] = [
   {
-    slug: 'welcome-to-the-new-jccf-website',
-    title: 'Welcome to the new JCCF FUTA website',
+    slug: 'new-jccf-futa-website',
+    title: 'The JCCF FUTA website is live',
     type: 'announcement',
     date: '2027-01-01T09:00:00+01:00',
-    excerpt: 'Find a fellowship, see the next Household programme, watch sermons and give — all in one place.',
+    placeholder: true,
+    excerpt: 'Find a fellowship, see the next Household programme, watch sermons and give.',
     body: paragraphs(
       'The Publicity Unit is glad to launch the new JCCF FUTA website. It was built for phones and mobile data first.',
       'Use it to find a fellowship near you, see the next Household programme with a countdown, watch recent sermons, give, and send a private prayer request.',
@@ -299,7 +299,8 @@ export const POSTS: Post[] = [
     title: 'The unity of the faith',
     type: 'devotional',
     date: '2026-11-08T07:00:00+01:00',
-    excerpt: '“Till we all come in the unity of the faith…” — a short reflection on our motto.',
+    placeholder: true,
+    excerpt: 'A short reflection on our motto, Ephesians 4:13.',
     author: 'JCCF Publicity Unit',
     body: paragraphs(
       'Ephesians 4:13 does not describe a merger of organisations. It describes a people growing up together into Christ.',
@@ -375,10 +376,9 @@ export const SITE_SETTINGS: SiteSettings = {
     whatsapp: undefined,
   },
   stats: [
-    { value: 30, label: 'Years of one Household', note: 'since 1996/97' },
-    { value: FELLOWSHIPS.length, label: 'Fellowships & Christian groups' },
-    { value: UNITS.length, label: 'Household units' },
-    { value: 1, label: 'Household, one faith' },
+    { value: 30, label: 'years as one Household', note: 'Started as a joint prayer gathering in 1996/97' },
+    { value: FELLOWSHIPS.length, label: 'registered fellowships and Christian groups', note: 'Listed in the 2024 constitution' },
+    { value: UNITS.length, label: 'Household units', note: 'Choir, Drama, Publicity, Ushering and Organizing' },
   ],
   liveWindows: [
     { day: 'Sunday', start: '15:30', end: '20:00' },

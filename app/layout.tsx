@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import { SITE } from '@/lib/site';
 import './globals.css';
 
-// Google Fonts (OFL), self-hosted from app/fonts — latin subset (DESIGN §3, PRD: self-hosted).
+// Google Fonts (OFL), self-hosted from app/fonts, latin subset (DESIGN §3, PRD: self-hosted).
 // Committed to the repo so builds never depend on downloading fonts.
 const anton = localFont({
   src: './fonts/anton-latin.woff2',

@@ -10,7 +10,7 @@ export default async function NewsPage() {
   const posts = await getPosts();
   return (
     <>
-      <PageHero crumb="News" compact title="News *& devotionals*" intro="Announcements from the Household Executive and devotionals to start your day." />
+      <PageHero crumb="News" compact title="News and devotionals" intro="Announcements from the Household Executive and devotionals to start your day." />
       <section className="section">
         <div className="container-page"><NewsList posts={posts} /></div>
       </section>

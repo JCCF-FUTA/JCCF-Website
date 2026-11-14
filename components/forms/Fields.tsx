@@ -138,7 +138,7 @@ export function Checkbox({ label, description, className, ...rest }: { label: st
 
 export function FormAlert({ kind = 'error', children }: { kind?: 'error' | 'info'; children: React.ReactNode }) {
   return (
-    <p role={kind === 'error' ? 'alert' : 'status'} className={cn('flex items-start gap-2 rounded-md p-4 text-body-md', kind === 'error' ? 'bg-error-container text-on-error-container' : 'bg-surface-container text-on-surface-variant')}>
+    <p role={kind === 'error' ? 'alert' : 'status'} className={cn('flex items-start gap-2 rounded-md p-4 text-body-lg', kind === 'error' ? 'bg-error-container text-on-error-container' : 'bg-surface-container text-on-surface-variant')}>
       <Icon name={kind === 'error' ? 'error' : 'info'} size={20} className="mt-px" />
       <span>{children}</span>
     </p>
@@ -147,7 +147,7 @@ export function FormAlert({ kind = 'error', children }: { kind?: 'error' | 'info
 
 export function PrivacyNote({ children }: { children: React.ReactNode }) {
   return (
-    <p className="flex items-start gap-2 text-body-sm text-on-surface-variant">
+    <p className="flex items-start gap-2 text-body-md text-on-surface-variant">
       <Icon name="lock" size={16} className="mt-px" />
       <span>{children}</span>
     </p>

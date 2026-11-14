@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PHOTOS } from '@/lib/content/seed';
-import { programmeLine } from '@/lib/format';
+import { formatDate, programmeLine, relativeDays } from '@/lib/format';
 import type { LiveStatus, Programme } from '@/lib/types';
 import { LinkButton } from '@/components/ui/Button';
 import { Eyebrow } from '@/components/ui/Eyebrow';
@@ -11,8 +11,15 @@ import { Title } from '@/components/ui/Title';
 import { Countdown } from '@/components/programmes/Countdown';
 import { FinderBar } from '@/components/fellowships/FinderBar';
 
-/** Home hero on stage (DESIGN §C05): headline, CTAs, countdown card, finder bar. */
-export function Hero({ programme, live, venues, now }: { programme: Programme | null; live: LiveStatus; venues: string[]; now: number }) {
+const d = (n: number) => ({ '--d': n }) as React.CSSProperties;
+
+/**
+ * Home hero on stage (DESIGN §C05, amended by ANTI-SLOP.md).
+ * Purpose: find a fellowship. The finder bar is the one primary action; the motto is the one bold element.
+ * The next programme is a glass card on wide screens and a single quiet line on phones.
+ */
+export function Hero({ programme, live, venues, days, now }: { programme: Programme | null; live: LiveStatus; venues: string[]; days: string[]; now: number }) {
+  const inDays = programme ? relativeDays(programme.start, now) : null;
   return (
     <section data-hero className="theme-stage relative isolate">
       <div className="relative flex min-h-[100svh] flex-col overflow-hidden expanded:max-h-[960px]">
@@ -20,12 +27,13 @@ export function Hero({ programme, live, venues, now }: { programme: Programme | 
           <SmartImage image={PHOTOS.stage} sizes="100vw" priority decorative imgClassName="object-[50%_35%]" />
         </div>
         <div className="overlay-stage absolute inset-0 -z-10" aria-hidden="true" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_0%_100%,rgb(250_4_4/0.22),transparent_60%)]" aria-hidden="true" />
+        {/* Readability behind the text column on wide screens (keeps on-stage-variant above 4.5:1) */}
+        <div className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-black/70 via-black/30 to-transparent expanded:block" aria-hidden="true" />
 
-        <div className="container-page grid flex-1 items-end gap-10 pt-32 pb-8 expanded:grid-cols-12 expanded:items-center expanded:pt-36 expanded:pb-32">
-          <div className="flex flex-col items-center gap-6 text-center expanded:col-span-7 expanded:items-start expanded:text-left">
-            <div data-hero-item style={{ '--d': 0 } as React.CSSProperties}>
-              <Eyebrow tone="stage">Our vision · Ephesians 4:13</Eyebrow>
+        <div className="container-page grid flex-1 items-end gap-8 pt-28 pb-6 expanded:grid-cols-12 expanded:items-center expanded:pt-36 expanded:pb-32">
+          <div className="flex flex-col items-start gap-5 expanded:col-span-7">
+            <div data-hero-item style={d(0)}>
+              <Eyebrow tone="stage">Ephesians 4:13</Eyebrow>
             </div>
             <Title
               as="h1"
@@ -33,33 +41,29 @@ export function Hero({ programme, live, venues, now }: { programme: Programme | 
               tone="stage"
               text={'Till we all come\nin the unity\n*of the faith*'}
               heroItem={1}
-              className="text-[clamp(3rem,10.5vw,6.75rem)] expanded:text-[clamp(4rem,7.6vw,7rem)]"
+              className="text-[clamp(3rem,13vw,6.75rem)] expanded:text-[clamp(4rem,7.6vw,7rem)]"
             />
-            <p data-hero-item style={{ '--d': 2 } as React.CSSProperties} className="max-w-[46ch] text-body-lg text-on-stage-variant medium:text-[1.125rem] medium:leading-7">
-              The Joint Christian Campus Fellowship, FUTA — one Household of every fellowship on campus since 1996/97.
+            <p data-hero-item style={d(2)} className="max-w-[46ch] text-body-lg text-white/90 medium:text-[1.125rem] medium:leading-7">
+              Every Protestant fellowship and Christian group at FUTA belongs to one Household, the Joint Christian Campus Fellowship. Find one that meets on your day, near your hostel.
             </p>
-            <div data-hero-item style={{ '--d': 3 } as React.CSSProperties} className="flex flex-wrap justify-center gap-3 expanded:justify-start">
-              <LinkButton href="/fellowships" size="lg" tone="stage" trailingIcon="arrow_forward" data-magnetic>
-                Find a fellowship
-              </LinkButton>
+            <div data-hero-item style={d(3)} className="flex flex-wrap gap-3">
               {live.live ? (
-                <LinkButton href="/media#live" size="lg" tone="stage" variant="filled-inverse" data-magnetic>
+                <LinkButton href="/media#live" tone="stage" variant="filled-inverse">
                   <span className="mr-2 inline-block size-2 rounded-full bg-live animate-live-pulse" aria-hidden="true" />
-                  Watch live
+                  Watch the live service
                 </LinkButton>
               ) : (
-                <LinkButton href="/media" size="lg" tone="stage" variant="outlined" icon="play_arrow" data-magnetic>
-                  Watch sermons
-                </LinkButton>
+                <LinkButton href="/media" tone="stage" variant="outlined" icon="play_arrow">Watch sermons</LinkButton>
               )}
             </div>
           </div>
 
-          <div data-hero-item style={{ '--d': 4 } as React.CSSProperties} className="w-full expanded:col-span-5 expanded:justify-self-end expanded:max-w-[420px]">
+          {/* Expanded+: next programme card (the site's one glass element: it sits over a photo) */}
+          <div data-hero-item style={d(4)} className="hidden w-full expanded:col-span-5 expanded:block expanded:justify-self-end expanded:max-w-[420px]">
             {live.live ? (
               <LiveTeaser live={live} />
             ) : programme ? (
-              <div className="glass rounded-xl p-5 medium:p-6">
+              <div className="glass rounded-xl p-6">
                 <Countdown
                   title={programme.title}
                   href={`/programmes/${programme.slug}`}
@@ -73,15 +77,24 @@ export function Hero({ programme, live, venues, now }: { programme: Programme | 
           </div>
         </div>
 
-        {/* Compact: finder sits in the hero flow */}
-        <div className="container-page pb-10 expanded:hidden" data-hero-item style={{ '--d': 5 } as React.CSSProperties}>
-          <FinderBar venues={venues} />
+        {/* Compact: the finder is the main action; the next programme is one quiet line under it */}
+        <div className="container-page flex flex-col gap-3 pb-8 expanded:hidden" data-hero-item style={d(4)}>
+          <FinderBar venues={venues} days={days} />
+          {!live.live && programme && (
+            <Link href={`/programmes/${programme.slug}`} className="flex min-h-12 items-center gap-2 text-body-md text-white/90">
+              <Icon name="event" size={20} className="shrink-0" />
+              <span className="min-w-0 flex-1 truncate">
+                Next: <span className="font-semibold text-white">{programme.title}</span>, {formatDate(programme.start)}{inDays ? ` (${inDays.toLowerCase()})` : ''}
+              </span>
+              <Icon name="arrow_forward" size={20} className="shrink-0" />
+            </Link>
+          )}
         </div>
       </div>
 
       {/* Expanded+: finder overlaps the hero's bottom edge by half its height */}
       <div className="container-page absolute inset-x-0 bottom-0 z-10 hidden translate-y-1/2 expanded:block">
-        <FinderBar venues={venues} />
+        <FinderBar venues={venues} days={days} />
       </div>
     </section>
   );

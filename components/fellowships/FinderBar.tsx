@@ -16,11 +16,17 @@ export const EMPTY_FINDER: FinderValues = { q: '', day: '', venue: '', type: '' 
  */
 export function FinderBar({
   venues,
+  days = DAYS,
+  showType = false,
   values: controlled,
   onChange,
   className,
 }: {
   venues: string[];
+  /** Only days some fellowship actually meets on (filters with no data are hidden) */
+  days?: string[];
+  /** Show the Fellowship / Christian group filter (only when both kinds exist) */
+  showType?: boolean;
   values?: FinderValues;
   onChange?: (v: FinderValues) => void;
   className?: string;
@@ -48,27 +54,30 @@ export function FinderBar({
 
   const activeFilters = [v.day, v.venue, v.type].filter(Boolean).length;
 
+  const dayOptions = DAYS.filter((x) => days.includes(x));
+  const hasFilters = dayOptions.length > 0 || venues.length > 0 || showType;
+
   const selects = (layout: 'bar' | 'sheet') => (
     <>
-      <Segment label="Meeting day" layout={layout}>
+      {dayOptions.length > 0 && <Segment label="Meeting day" layout={layout}>
         <select value={v.day} onChange={(e) => set({ day: e.target.value })} className={selectCls(layout)} aria-label="Meeting day">
           <option value="">Any day</option>
-          {DAYS.map((d) => <option key={d} value={d}>{d}</option>)}
+          {dayOptions.map((d) => <option key={d} value={d}>{d}</option>)}
         </select>
-      </Segment>
-      <Segment label="Venue" layout={layout}>
+      </Segment>}
+      {venues.length > 0 && <Segment label="Venue" layout={layout}>
         <select value={v.venue} onChange={(e) => set({ venue: e.target.value })} className={selectCls(layout)} aria-label="Venue">
           <option value="">Any venue</option>
           {venues.map((x) => <option key={x} value={x}>{x}</option>)}
         </select>
-      </Segment>
-      <Segment label="Type" layout={layout}>
+      </Segment>}
+      {showType && <Segment label="Type" layout={layout}>
         <select value={v.type} onChange={(e) => set({ type: e.target.value })} className={selectCls(layout)} aria-label="Type">
           <option value="">All</option>
           <option value="fellowship">Fellowship</option>
           <option value="group">Christian group</option>
         </select>
-      </Segment>
+      </Segment>}
     </>
   );
 
@@ -88,7 +97,7 @@ export function FinderBar({
         </Segment>
         {selects('bar')}
         <div className="p-2">
-          <Button type="submit" className="h-full rounded-xl px-7" icon="search">Find</Button>
+          <Button type="submit" className="h-full rounded-xl px-7" icon="search">Search</Button>
         </div>
       </div>
 
@@ -101,12 +110,12 @@ export function FinderBar({
             type="search"
             value={v.q}
             onChange={(e) => set({ q: e.target.value })}
-            placeholder="Find a fellowship"
+            placeholder="Search fellowships"
             className="min-w-0 flex-1 bg-transparent text-body-lg text-on-surface outline-none placeholder:text-on-surface-variant"
             enterKeyHint="search"
           />
         </label>
-        <button
+        {hasFilters ? <button
           type="button"
           onClick={() => setSheetOpen(true)}
           aria-label={`Filters${activeFilters ? ` (${activeFilters} active)` : ''}`}
@@ -116,7 +125,11 @@ export function FinderBar({
           {activeFilters > 0 && (
             <span className="absolute -right-1 -top-1 inline-flex size-5 items-center justify-center rounded-full bg-tertiary text-label-sm text-on-tertiary">{activeFilters}</span>
           )}
-        </button>
+        </button> : (
+          <button type="submit" aria-label="Search" className="state-layer inline-flex size-14 items-center justify-center rounded-xl bg-primary text-on-primary">
+            <Icon name="search" />
+          </button>
+        )}
       </div>
 
       <BottomSheet open={sheetOpen} onClose={() => setSheetOpen(false)} title="Filter fellowships">

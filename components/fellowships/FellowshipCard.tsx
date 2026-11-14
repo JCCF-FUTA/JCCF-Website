@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Fellowship } from '@/lib/types';
+import { SHOW_SAMPLES } from '@/lib/site';
 import { Brand } from '@/components/ui/Brand';
 import { StatusChip } from '@/components/ui/Chip';
 import { Icon } from '@/components/ui/Icon';
@@ -46,24 +47,27 @@ export function FellowshipListingCard({ f }: { f: Fellowship }) {
 
   return (
     <article className="group relative flex h-full flex-col rounded-xl border border-outline-variant bg-surface-container-lowest p-5 transition-[transform,box-shadow] duration-300 ease-standard hover:-translate-y-1 hover:shadow-elev-2 has-[a.card-link:focus-visible]:outline-3 has-[a.card-link:focus-visible]:outline-primary">
-      <header className="flex items-center gap-3">
-        <span className="relative inline-flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary-container text-label-sm font-bold text-on-primary-container">
-          {f.logo?.url ? <Image src={f.logo.url} alt="" fill sizes="48px" className="object-cover" /> : (f.shortName ?? f.name).slice(0, 4)}
-        </span>
+      {f.image?.url && (
+        <div className="relative -mx-5 -mt-5 mb-4 aspect-[16/10] overflow-hidden rounded-t-xl">
+          <SmartImage image={f.image} sizes="(min-width: 840px) 33vw, (min-width: 600px) 50vw, 100vw" imgClassName="transition-transform duration-500 group-hover:scale-105" />
+        </div>
+      )}
+      <header className="flex items-start gap-3">
+        {f.logo?.url && (
+          <span className="relative inline-flex size-12 shrink-0 overflow-hidden rounded-full bg-surface-container">
+            <Image src={f.logo.url} alt="" fill sizes="48px" className="object-cover" />
+          </span>
+        )}
         <div className="min-w-0 flex-1">
-          <h3 className="text-title-md font-semibold">
+          {f.shortName && <p className="font-display text-headline-sm uppercase leading-none text-primary">{f.shortName}</p>}
+          <h3 className="mt-1 text-title-md font-semibold">
             <Link href={`/fellowships/${f.slug}`} className="card-link outline-none after:absolute after:inset-0 after:rounded-xl after:content-['']">
               {f.name}
             </Link>
           </h3>
-          {f.shortName && <p className="text-body-sm text-on-surface-variant">{f.shortName}</p>}
         </div>
+        {f.placeholder && SHOW_SAMPLES && <StatusChip kind="placeholder">Sample</StatusChip>}
       </header>
-
-      <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-lg">
-        <SmartImage image={f.image} sizes="(min-width: 840px) 33vw, (min-width: 600px) 50vw, 100vw" fallbackLabel={f.shortName} imgClassName="transition-transform duration-500 group-hover:scale-105" />
-        <span className="absolute left-3 top-3"><StatusChip kind="image">{f.type === 'group' ? 'Christian group' : 'Fellowship'}</StatusChip></span>
-      </div>
 
       {rows.length > 0 && (
         <ul className="mt-4 flex flex-col gap-2 text-body-md text-on-surface-variant">
@@ -72,7 +76,6 @@ export function FellowshipListingCard({ f }: { f: Fellowship }) {
           ))}
         </ul>
       )}
-      {f.placeholder && <p className="mt-3 text-body-sm text-on-surface-variant italic">Schedule to be confirmed by the fellowship.</p>}
 
       <footer className="mt-auto flex items-center justify-between pt-4">
         <span className="inline-flex h-12 items-center gap-1 text-label-lg font-semibold text-primary">

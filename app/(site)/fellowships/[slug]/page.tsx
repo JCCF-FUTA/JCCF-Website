@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getFellowship, getFellowships } from '@/lib/data';
 import { PHOTOS } from '@/lib/content/seed';
-import { SITE } from '@/lib/site';
+import { SHOW_SAMPLES, SITE } from '@/lib/site';
 import { Brand } from '@/components/ui/Brand';
 import { LinkButton } from '@/components/ui/Button';
 import { StatusChip } from '@/components/ui/Chip';
@@ -88,8 +88,8 @@ export default async function FellowshipPage({ params }: { params: Promise<{ slu
               <p className="mt-4 max-w-prose text-body-lg text-on-surface-variant">
                 {f.description ?? `${f.name} is a registered constituent fellowship of the JCCF FUTA Household.`}
               </p>
-              {f.placeholder && (
-                <p className="mt-4 flex max-w-prose items-start gap-2 rounded-md bg-tertiary-container p-4 text-body-md text-on-tertiary-container">
+              {f.placeholder && SHOW_SAMPLES && (
+                <p className="mt-4 flex max-w-prose items-start gap-2 rounded-md bg-tertiary-container p-4 text-body-lg text-on-tertiary-container">
                   <Icon name="info" size={20} className="mt-px" /> Meeting days, time and venue shown here are not yet confirmed by the fellowship. Please check with them before you visit.
                 </p>
               )}
@@ -113,7 +113,7 @@ export default async function FellowshipPage({ params }: { params: Promise<{ slu
                         <dt className="text-label-md font-semibold uppercase text-on-surface-variant">{r.label}</dt>
                         <dd className="text-body-lg">{r.value}</dd>
                         {r.href && (
-                          <a href={r.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-label-lg font-semibold text-primary">
+                          <a href={r.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-1 text-label-lg font-semibold text-primary">
                             {r.linkLabel} <Icon name="north_east" size={16} />
                           </a>
                         )}

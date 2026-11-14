@@ -41,7 +41,7 @@ export function NewsList({ posts }: { posts: Post[] }) {
                 <h2 className="text-title-lg font-semibold">
                   <Link href={`/news/${p.slug}`} className="after:absolute after:inset-0">{p.title}</Link>
                 </h2>
-                <p className="text-body-md text-on-surface-variant">{p.excerpt}</p>
+                <p className="text-body-lg text-on-surface-variant">{p.excerpt}</p>
                 <span className="mt-auto inline-flex h-12 items-center gap-1 text-label-lg font-semibold text-primary">
                   Read <Icon name="arrow_forward" size={20} className="transition-transform group-hover:translate-x-1" />
                 </span>

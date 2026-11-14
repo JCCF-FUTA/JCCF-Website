@@ -16,7 +16,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="theme-stage">
       <div className="container-page pt-16 pb-8 expanded:pt-24">
-        <div className="grid gap-10 border-b border-stage-outline pb-12 expanded:grid-cols-12">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-10 border-b border-stage-outline pb-12 expanded:grid-cols-12">
           <div className="flex flex-col gap-5 expanded:col-span-6">
             <Link href="/" className="flex items-center gap-4 self-start" aria-label="JCCF FUTA home">
               <Image src="/brand/jccf-logo-160.webp" alt="" width={64} height={64} className="size-16" />
@@ -26,7 +26,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               </span>
             </Link>
             <p className="max-w-[40ch] text-body-lg italic text-on-stage-variant">
-              “{SITE.motto}.” <span className="not-italic">— {SITE.mottoRef}</span>
+              “{SITE.motto}” ({SITE.mottoRef})
             </p>
           </div>
           <div className="flex flex-col gap-3 expanded:col-span-6">
@@ -42,7 +42,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               <ul>
                 {col.links.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="inline-flex min-h-11 items-center text-body-lg hover:text-stage-accent-text">{l.label}</Link>
+                    <Link href={l.href} className="inline-flex min-h-12 items-center text-body-lg hover:text-stage-accent-text">{l.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -55,10 +55,10 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 <li className="flex gap-3 py-2"><Icon name="location_on" className="text-on-stage-variant" /> <span>{settings.address}</span></li>
               )}
               {settings.email && (
-                <li><a href={`mailto:${settings.email}`} className="flex min-h-11 items-center gap-3 hover:text-stage-accent-text"><Icon name="mail" className="text-on-stage-variant" /> {settings.email}</a></li>
+                <li><a href={`mailto:${settings.email}`} className="flex min-h-12 items-center gap-3 hover:text-stage-accent-text"><Icon name="mail" className="text-on-stage-variant" /> {settings.email}</a></li>
               )}
               {settings.phone && (
-                <li><a href={`tel:${settings.phone.replace(/\s/g, '')}`} className="flex min-h-11 items-center gap-3 hover:text-stage-accent-text"><Icon name="call" className="text-on-stage-variant" /> {settings.phone}</a></li>
+                <li><a href={`tel:${settings.phone.replace(/\s/g, '')}`} className="flex min-h-12 items-center gap-3 hover:text-stage-accent-text"><Icon name="call" className="text-on-stage-variant" /> {settings.phone}</a></li>
               )}
             </ul>
             {socials.length > 0 && (

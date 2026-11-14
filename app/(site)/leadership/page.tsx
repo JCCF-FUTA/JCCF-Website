@@ -24,7 +24,7 @@ function Grid({ leaders, tone = 'light' }: { leaders: Leader[]; tone?: 'light' |
 export default async function LeadershipPage() {
   const leaders = await getLeaders();
   const exec = leaders.filter((l) => l.group === 'executive');
-  const president = exec.find((l) => l.order === 1) ?? exec[0];
+  const president = exec.find((l) => l.order === 1);
   const units = leaders.filter((l) => l.group === 'unit');
   const advisers = leaders.filter((l) => l.group === 'adviser');
 
@@ -32,27 +32,35 @@ export default async function LeadershipPage() {
     <>
       <PageHero
         crumb="Leadership"
-        title="Servants of *the Household*"
+        title="Leadership"
         intro="The Household Executive is chosen prayerfully each session from final-year students of FUTA, nominated by their fellowships and approved by the Committee of Presidents."
       />
 
-      <section aria-label="Household President" className="theme-stage section pt-12">
-        <div className="container-page">
-          <PresidentSplit president={president} showLink={false} />
-        </div>
-      </section>
+      {president && (
+        <section aria-label="Household President" className="theme-stage section pt-12">
+          <div className="container-page">
+            <PresidentSplit president={president} showLink={false} />
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="exec-title" className="section">
         <div className="container-page">
-          <SectionHeader id="exec-title" eyebrow="Current session" title="Household *Executive*" lead="Each officer reports to the President and gives a report at the end of every semester." />
-          <Grid leaders={exec.filter((l) => l !== president)} />
+          <SectionHeader id="exec-title" title="Household Executive" lead="Each officer reports to the President and gives a report at the end of every semester." />
+          {exec.length ? (
+            <Grid leaders={exec.filter((l) => l !== president)} />
+          ) : (
+            <p className="max-w-prose rounded-xl border border-dashed border-outline-variant p-6 text-body-lg text-on-surface-variant">
+              The current Household Executive will be listed here with their offices, departments and photos once the names are confirmed.
+            </p>
+          )}
         </div>
       </section>
 
       {units.length > 0 && (
         <section aria-labelledby="units-title" className="section bg-surface-container-low">
           <div className="container-page">
-            <SectionHeader id="units-title" eyebrow="Household units" title="Unit *coordinators*" lead="They lead the choir, drama and ushering units with coordinators from member fellowships." />
+            <SectionHeader id="units-title" title="Unit coordinators" lead="They lead the choir, drama and ushering units with coordinators from member fellowships." />
             <Grid leaders={units} />
           </div>
         </section>
@@ -61,7 +69,7 @@ export default async function LeadershipPage() {
       {advisers.length > 0 && (
         <section aria-labelledby="advisers-title" className="section">
           <div className="container-page">
-            <SectionHeader id="advisers-title" eyebrow="Guidance" title="Staff advisers *& patrons*" lead="Born-again members of staff who guide the Household and stand with it before the University." />
+            <SectionHeader id="advisers-title" title="Staff advisers and patrons" lead="Born-again members of staff who guide the Household and stand with it before the University." />
             <ul data-reveal-stagger className="grid gap-4 medium:grid-cols-2 expanded:grid-cols-3">
               {advisers.map((a) => (
                 <li key={a.name} className="flex items-center gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-5">

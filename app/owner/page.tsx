@@ -20,7 +20,7 @@ export default async function OwnerHome() {
   ].filter((c) => c.show);
   return (
     <div>
-      <h1 className="mb-6 text-headline-sm font-semibold">Welcome</h1>
+      <h1 className="mb-6 text-headline-sm font-semibold">Staff area</h1>
       <ul className="grid gap-4 medium:grid-cols-2 expanded:grid-cols-3">
         {cards.map((c) => (
           <li key={c.href}>
